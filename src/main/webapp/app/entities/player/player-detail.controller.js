@@ -5,9 +5,9 @@
         .module('tableTennisApp')
         .controller('PlayerDetailController', PlayerDetailController);
 
-    PlayerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Player', 'User', 'Club'];
+    PlayerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Player', 'User', 'Club', 'Image'];
 
-    function PlayerDetailController($scope, $rootScope, $stateParams, previousState, entity, Player, User, Club) {
+    function PlayerDetailController($scope, $rootScope, $stateParams, previousState, entity, Player, User, Club, Image) {
         var vm = this;
 
         vm.player = entity;

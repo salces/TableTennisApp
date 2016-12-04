@@ -42,6 +42,11 @@ public class PlayerDTO implements Serializable {
 
     private String clubPrefix;
 
+    private Long imageId;
+    
+
+    private String imageAlias;
+
     public Long getId() {
         return id;
     }
@@ -110,6 +115,23 @@ public class PlayerDTO implements Serializable {
 
     public void setClubPrefix(String clubPrefix) {
         this.clubPrefix = clubPrefix;
+    }
+
+    public Long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
+    }
+
+
+    public String getImageAlias() {
+        return imageAlias;
+    }
+
+    public void setImageAlias(String imageAlias) {
+        this.imageAlias = imageAlias;
     }
 
     @Override

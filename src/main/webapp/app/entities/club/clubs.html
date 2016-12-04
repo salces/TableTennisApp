@@ -25,6 +25,7 @@
                     <th jh-sort-by="email"><span>Email</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="homePage"><span>Home Page</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="managerLogin"><span>Manager</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="imageAlias"><span>Image</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -38,6 +39,9 @@
                     <td>{{club.homePage}}</td>
                     <td>
                         {{club.managerLogin}}
+                    </td>
+                    <td>
+                        <a ui-sref="image-detail({id:club.imageId})">{{club.imageAlias}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

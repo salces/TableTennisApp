@@ -41,6 +41,11 @@ public class ClubDTO implements Serializable {
 
     private String managerLogin;
 
+    private Long imageId;
+    
+
+    private String imageAlias;
+
     public Long getId() {
         return id;
     }
@@ -99,6 +104,23 @@ public class ClubDTO implements Serializable {
 
     public void setManagerLogin(String userLogin) {
         this.managerLogin = userLogin;
+    }
+
+    public Long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
+    }
+
+
+    public String getImageAlias() {
+        return imageAlias;
+    }
+
+    public void setImageAlias(String imageAlias) {
+        this.imageAlias = imageAlias;
     }
 
     @Override

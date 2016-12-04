@@ -46,6 +46,9 @@ public class Player implements Serializable {
     @ManyToOne
     private Club club;
 
+    @ManyToOne
+    private Image image;
+
     public Long getId() {
         return id;
     }
@@ -130,6 +133,19 @@ public class Player implements Serializable {
 
     public void setClub(Club club) {
         this.club = club;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public Player image(Image image) {
+        this.image = image;
+        return this;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     @Override

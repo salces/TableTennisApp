@@ -124,6 +124,12 @@
                 <option value=""></option>
             </select>
         </div>
+        <div class="form-group">
+            <label for="field_image">Image</label>
+            <select class="form-control" id="field_image" name="image" ng-model="vm.club.imageId" ng-options="image.id as image.alias for image in vm.images"            >
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

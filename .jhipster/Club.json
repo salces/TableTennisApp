@@ -13,6 +13,12 @@
             "otherEntityName": "player",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "club"
+        },
+        {
+            "relationshipName": "image",
+            "otherEntityName": "image",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "alias"
         }
     ],
     "fields": [

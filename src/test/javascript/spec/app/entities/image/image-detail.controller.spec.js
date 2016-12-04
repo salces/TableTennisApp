@@ -2,9 +2,9 @@
 
 describe('Controller Tests', function() {
 
-    describe('Club Management Detail Controller', function() {
+    describe('Image Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockClub, MockUser, MockPlayer, MockImage;
+        var MockEntity, MockPreviousState, MockImage, MockUser;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -12,10 +12,8 @@ describe('Controller Tests', function() {
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
-            MockClub = jasmine.createSpy('MockClub');
-            MockUser = jasmine.createSpy('MockUser');
-            MockPlayer = jasmine.createSpy('MockPlayer');
             MockImage = jasmine.createSpy('MockImage');
+            MockUser = jasmine.createSpy('MockUser');
             
 
             var locals = {
@@ -23,20 +21,18 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
-                'Club': MockClub,
-                'User': MockUser,
-                'Player': MockPlayer,
-                'Image': MockImage
+                'Image': MockImage,
+                'User': MockUser
             };
             createController = function() {
-                $injector.get('$controller')("ClubDetailController", locals);
+                $injector.get('$controller')("ImageDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'tableTennisApp:clubUpdate';
+                var eventType = 'tableTennisApp:imageUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

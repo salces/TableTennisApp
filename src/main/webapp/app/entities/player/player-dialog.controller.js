@@ -5,9 +5,9 @@
         .module('tableTennisApp')
         .controller('PlayerDialogController', PlayerDialogController);
 
-    PlayerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Player', 'User', 'Club'];
+    PlayerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Player', 'User', 'Club', 'Image'];
 
-    function PlayerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Player, User, Club) {
+    function PlayerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Player, User, Club, Image) {
         var vm = this;
 
         vm.player = entity;
@@ -15,6 +15,7 @@
         vm.save = save;
         vm.users = User.query();
         vm.clubs = Club.query();
+        vm.images = Image.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

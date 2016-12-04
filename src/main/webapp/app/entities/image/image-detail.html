@@ -1,0 +1,40 @@
+
+<div>
+    <h2><span>Image</span> {{vm.image.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Alias</span></dt>
+        <dd>
+            <span>{{vm.image.alias}}</span>
+        </dd>
+        <dt><span>Data</span></dt>
+        <dd>
+            <div ng-if="vm.image.data">
+                <a ng-click="vm.openFile(vm.image.dataContentType, vm.image.data)">
+                    <img data-ng-src="{{'data:' + vm.image.dataContentType + ';base64,' + vm.image.data}}" style="max-width: 100%;"/>
+                </a>
+                {{vm.image.dataContentType}}, {{vm.byteSize(vm.image.data)}}
+            </div>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.image.name}}</span>
+        </dd>
+        <dt><span>Owner</span></dt>
+        <dd>
+            {{vm.image.ownerLogin}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="image-detail.edit({id:vm.image.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

@@ -1,13 +1,13 @@
 <div>
-    <h2>Players</h2>
+    <h2>Images</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="player.new" >
+                <button class="btn btn-primary" ui-sref="image.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span >
-                        Create new Player
+                        Create new Image
                     </span>
                 </button>
             </div>
@@ -19,48 +19,43 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="alias"><span>Alias</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="data"><span>Data</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="surname"><span>Surname</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="nationality"><span>Nationality</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="height"><span>Height</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="managerLogin"><span>Manager</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="clubPrefix"><span>Club</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="imageAlias"><span>Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ownerLogin"><span>Owner</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="player in vm.players track by player.id">
-                    <td><a ui-sref="player-detail({id:player.id})">{{player.id}}</a></td>
-                    <td>{{player.name}}</td>
-                    <td>{{player.surname}}</td>
-                    <td>{{player.nationality}}</td>
-                    <td>{{player.height}}</td>
+                <tr ng-repeat="image in vm.images track by image.id">
+                    <td><a ui-sref="image-detail({id:image.id})">{{image.id}}</a></td>
+                    <td>{{image.alias}}</td>
                     <td>
-                        {{player.managerLogin}}
+                        <a ng-if="image.data" ng-click="vm.openFile(image.dataContentType, image.data)">
+                            <img data-ng-src="{{'data:' + image.dataContentType + ';base64,' + image.data}}" style="max-height: 30px;"/>
+                        </a>
+                        <span ng-if="image.data">{{image.dataContentType}}, {{vm.byteSize(image.data)}}</span>
                     </td>
+                    <td>{{image.name}}</td>
                     <td>
-                        <a ui-sref="club-detail({id:player.clubId})">{{player.clubPrefix}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="image-detail({id:player.imageId})">{{player.imageAlias}}</a>
+                        {{image.ownerLogin}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="player-detail({id:player.id})"
+                                    ui-sref="image-detail({id:image.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="player.edit({id:player.id})"
+                                    ui-sref="image.edit({id:image.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="player.delete({id:player.id})"
+                                    ui-sref="image.delete({id:image.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>

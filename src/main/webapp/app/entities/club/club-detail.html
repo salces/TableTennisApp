@@ -28,6 +28,10 @@
         <dd>
             {{vm.club.managerLogin}}
         </dd>
+        <dt><span>Image</span></dt>
+        <dd>
+            <a ui-sref="image-detail({id:vm.club.imageId})">{{vm.club.imageAlias}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="club"/>
 
+        <addForeignKeyConstraint baseColumnNames="image_id"
+                                 baseTableName="player"
+                                 constraintName="fk_player_image_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="image"/>
+
     </changeSet>
 </databaseChangeLog>

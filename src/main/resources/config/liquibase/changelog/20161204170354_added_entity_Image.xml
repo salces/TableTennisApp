@@ -14,38 +14,29 @@
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
     <!--
-        Added the entity Player.
+        Added the entity Image.
     -->
-    <changeSet id="20161204164335-1" author="jhipster">
-        <createTable tableName="player">
+    <changeSet id="20161204170354-1" author="jhipster">
+        <createTable tableName="image">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(25)">
+            <column name="alias" type="varchar(25)">
                 <constraints nullable="false" />
             </column>
             
-            <column name="surname" type="varchar(25)">
-                <constraints nullable="false" />
-            </column>
-            
-            <column name="nationality" type="varchar(25)">
-                <constraints nullable="false" />
-            </column>
-            
-            <column name="height" type="integer">
-                <constraints nullable="false" />
-            </column>
-            
-            <column name="manager_id" type="bigint">
+            <column name="data" type="longblob">
                 <constraints nullable="true" />
             </column>
-
-            <column name="club_id" type="bigint">
+            <column name="data_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-
-            <column name="image_id" type="bigint">
+            
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="owner_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

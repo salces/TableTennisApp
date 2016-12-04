@@ -55,6 +55,9 @@ public class Club implements Serializable {
     @JsonIgnore
     private Set<Player> players = new HashSet<>();
 
+    @ManyToOne
+    private Image image;
+
     public Long getId() {
         return id;
     }
@@ -164,6 +167,19 @@ public class Club implements Serializable {
 
     public void setPlayers(Set<Player> players) {
         this.players = players;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public Club image(Image image) {
+        this.image = image;
+        return this;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     @Override
