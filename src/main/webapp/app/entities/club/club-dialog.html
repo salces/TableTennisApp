@@ -1,0 +1,136 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myClubLabel">Create or edit a Club</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.club.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.club.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_prefix">Prefix</label>
+            <input type="text" class="form-control" name="prefix" id="field_prefix"
+                    ng-model="vm.club.prefix"
+                    required ng-minlength="2" ng-maxlength="25" />
+            <div ng-show="editForm.prefix.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.prefix.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.prefix.$error.minlength" translate-value-min="2">
+                    This field is required to be at least 2 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.prefix.$error.maxlength">
+                    This field cannot be longer than 25 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_location">Location</label>
+            <input type="text" class="form-control" name="location" id="field_location"
+                    ng-model="vm.club.location"
+                    required ng-minlength="2" ng-maxlength="25" />
+            <div ng-show="editForm.location.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.location.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.location.$error.minlength" translate-value-min="2">
+                    This field is required to be at least 2 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.location.$error.maxlength">
+                    This field cannot be longer than 25 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_estabilished">Estabilished</label>
+            <input type="number" class="form-control" name="estabilished" id="field_estabilished"
+                    ng-model="vm.club.estabilished"
+                    required min="1750" max="2500" />
+            <div ng-show="editForm.estabilished.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.estabilished.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.estabilished.$error.min" translate-value-min="1750">
+                    This field should be more than 1750.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.estabilished.$error.max">
+                    This field cannot be more than 2500.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.estabilished.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                    ng-model="vm.club.email"
+                    required ng-minlength="6" ng-maxlength="50" />
+            <div ng-show="editForm.email.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.email.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.email.$error.minlength" translate-value-min="6">
+                    This field is required to be at least 6 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.email.$error.maxlength">
+                    This field cannot be longer than 50 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_homePage">Home Page</label>
+            <input type="text" class="form-control" name="homePage" id="field_homePage"
+                    ng-model="vm.club.homePage"
+                    required ng-minlength="10" ng-maxlength="50" />
+            <div ng-show="editForm.homePage.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.homePage.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.homePage.$error.minlength" translate-value-min="10">
+                    This field is required to be at least 10 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.homePage.$error.maxlength">
+                    This field cannot be longer than 50 characters.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_manager">Manager</label>
+            <select class="form-control" id="field_manager" name="manager" ng-model="vm.club.managerId" ng-options="user.id as user.login for user in vm.users"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,69 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "manager",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "club",
+            "otherEntityName": "club",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "prefix"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "2",
+            "fieldValidateRulesMaxlength": "25"
+        },
+        {
+            "fieldName": "surname",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "2",
+            "fieldValidateRulesMaxlength": "25"
+        },
+        {
+            "fieldName": "nationality",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "2",
+            "fieldValidateRulesMaxlength": "25"
+        },
+        {
+            "fieldName": "height",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": "140",
+            "fieldValidateRulesMax": "240"
+        }
+    ],
+    "changelogDate": "20161204164335",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "player",
+    "pagination": "pager"
+}

@@ -1,0 +1,122 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myPlayerLabel">Create or edit a Player</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.player.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.player.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.player.name"
+                    required ng-minlength="2" ng-maxlength="25" />
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.name.$error.minlength" translate-value-min="2">
+                    This field is required to be at least 2 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.name.$error.maxlength">
+                    This field cannot be longer than 25 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_surname">Surname</label>
+            <input type="text" class="form-control" name="surname" id="field_surname"
+                    ng-model="vm.player.surname"
+                    required ng-minlength="2" ng-maxlength="25" />
+            <div ng-show="editForm.surname.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.surname.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.surname.$error.minlength" translate-value-min="2">
+                    This field is required to be at least 2 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.surname.$error.maxlength">
+                    This field cannot be longer than 25 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_nationality">Nationality</label>
+            <input type="text" class="form-control" name="nationality" id="field_nationality"
+                    ng-model="vm.player.nationality"
+                    required ng-minlength="2" ng-maxlength="25" />
+            <div ng-show="editForm.nationality.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.nationality.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.nationality.$error.minlength" translate-value-min="2">
+                    This field is required to be at least 2 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.nationality.$error.maxlength">
+                    This field cannot be longer than 25 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_height">Height</label>
+            <input type="number" class="form-control" name="height" id="field_height"
+                    ng-model="vm.player.height"
+                    required min="140" max="240" />
+            <div ng-show="editForm.height.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.height.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.height.$error.min" translate-value-min="140">
+                    This field should be more than 140.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.height.$error.max">
+                    This field cannot be more than 240.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.height.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_manager">Manager</label>
+            <select class="form-control" id="field_manager" name="manager" ng-model="vm.player.managerId" ng-options="user.id as user.login for user in vm.users"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_club">Club</label>
+            <select class="form-control" id="field_club" name="club" ng-model="vm.player.clubId" ng-options="club.id as club.prefix for club in vm.clubs"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
