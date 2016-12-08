@@ -9,7 +9,7 @@
 
     function TournamentController ($scope, $state, Tournament, ParseLinks, AlertService, pagingParams, paginationConstants) {
         var vm = this;
-        
+
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
@@ -55,5 +55,7 @@
                 search: vm.currentSearch
             });
         }
+
+
     }
 })();

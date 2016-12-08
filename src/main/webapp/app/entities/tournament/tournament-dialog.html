@@ -59,6 +59,21 @@
                 <option value=""></option>
             </select>
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="availablePlayersGridId">Available players</label>
+                <div class="form-group">
+                    <div id="availablePlayersGridId" class="grid" ui-grid="availablePlayersGrid" ui-grid-pagination></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="chosenPlayersGridId">Chosen players</label>
+                <div class="form-group">
+                    <div id="chosenPlayersGridId" class="grid" ui-grid="chosenPlayersGrid" ui-grid-pagination></div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

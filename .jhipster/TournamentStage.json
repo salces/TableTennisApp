@@ -1,0 +1,51 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "firstPlayer",
+            "otherEntityName": "player",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "secondPlayer",
+            "otherEntityName": "player",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "winner",
+            "otherEntityName": "player",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "nextStage",
+            "otherEntityName": "tournamentStage",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "tournament",
+            "otherEntityName": "tournament",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "phase",
+            "fieldType": "TournamentPhase",
+            "fieldValues": "FINAL,SEMIFINAL,QUARTERFINAL,ONE_EIGHT,ONE_SIXTEENTH,ONE_THIRTY_SECOND,ONE_SIXTY_FOURTH"
+        },
+        {
+            "fieldName": "phaseCode",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20161205180739",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "tournament_stage",
+    "pagination": "pager"
+}
