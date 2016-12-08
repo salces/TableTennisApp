@@ -1,4 +1,3 @@
-
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
@@ -11,32 +10,52 @@
         <div class="form-group" ng-show="vm.tournament.id">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.tournament.id" readonly />
+                   ng-model="vm.tournament.id" readonly/>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.tournament.name"
-                    required ng-minlength="2" ng-maxlength="25" />
+                   ng-model="vm.tournament.name"
+                   required ng-minlength="2" ng-maxlength="25"/>
             <div ng-show="editForm.name.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.name.$error.required">
+                   ng-show="editForm.name.$error.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.name.$error.minlength" translate-value-min="2">
+                   ng-show="editForm.name.$error.minlength" translate-value-min="2">
                     This field is required to be at least 2 characters.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.name.$error.maxlength">
+                   ng-show="editForm.name.$error.maxlength">
                     This field cannot be longer than 25 characters.
                 </p>
             </div>
         </div>
 
         <div class="form-group">
+            <label class="control-label" for="field_phase">Phase</label>
+            <select class="form-control" name="phase" ng-model="vm.tournament.phase" id="field_phase" required>
+                <option value="1">Finał</option>
+                <option value="2">1/2</option>
+                <option value="4">1/4</option>
+                <option value="8">1/8</option>
+                <option value="16">1/16</option>
+                <option value="32">1/32</option>
+                <option value="64">1/64</option>
+            </select>
+            <div ng-show="editForm.phase.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.phase.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="field_image">Image</label>
-            <select class="form-control" id="field_image" name="image" ng-model="vm.tournament.imageId" ng-options="image.id as image.id for image in vm.images"            >
+            <select class="form-control" id="field_image" name="image" ng-model="vm.tournament.imageId"
+                    ng-options="image.id as image.id for image in vm.images">
                 <option value=""></option>
             </select>
         </div>
