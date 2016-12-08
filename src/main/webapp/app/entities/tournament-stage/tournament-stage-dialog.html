@@ -1,0 +1,74 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTournamentStageLabel">Create or edit a Tournament Stage</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.tournamentStage.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.tournamentStage.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_phase">Phase</label>
+            <select class="form-control" name="phase" ng-model="vm.tournamentStage.phase" id="field_phase">
+                <option value="FINAL">FINAL</option>
+                <option value="SEMIFINAL">SEMIFINAL</option>
+                <option value="QUARTERFINAL">QUARTERFINAL</option>
+                <option value="ONE_EIGHT" data-translate="tableTennisApp.TournamentPhase.ONE_EIGHT">ONE_EIGHT</option>
+                <option value="ONE_SIXTEENTH" data-translate="tableTennisApp.TournamentPhase.ONE_SIXTEENTH">ONE_SIXTEENTH</option>
+                <option value="ONE_THIRTY_SECOND" data-translate="tableTennisApp.TournamentPhase.ONE_THIRTY_SECOND">ONE_THIRTY_SECOND</option>
+                <option value="ONE_SIXTY_FOURTH" data-translate="tableTennisApp.TournamentPhase.ONE_SIXTY_FOURTH">ONE_SIXTY_FOURTH</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_phaseCode">Phase Code</label>
+            <input type="number" class="form-control" name="phaseCode" id="field_phaseCode"
+                    ng-model="vm.tournamentStage.phaseCode"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_firstPlayer">First Player</label>
+            <select class="form-control" id="field_firstPlayer" name="firstPlayer" ng-model="vm.tournamentStage.firstPlayerId" ng-options="player.id as player.id for player in vm.players"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_secondPlayer">Second Player</label>
+            <select class="form-control" id="field_secondPlayer" name="secondPlayer" ng-model="vm.tournamentStage.secondPlayerId" ng-options="player.id as player.id for player in vm.players"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_winner">Winner</label>
+            <select class="form-control" id="field_winner" name="winner" ng-model="vm.tournamentStage.winnerId" ng-options="player.id as player.id for player in vm.players"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_nextStage">Next Stage</label>
+            <select class="form-control" id="field_nextStage" name="nextStage" ng-model="vm.tournamentStage.nextStageId" ng-options="tournamentStage.id as tournamentStage.id for tournamentStage in vm.tournamentstages"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_tournament">Tournament</label>
+            <select class="form-control" id="field_tournament" name="tournament" ng-model="vm.tournamentStage.tournamentId" ng-options="tournament.id as tournament.id for tournament in vm.tournaments"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

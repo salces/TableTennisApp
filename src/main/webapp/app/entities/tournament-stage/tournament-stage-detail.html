@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span>Tournament Stage</span> {{vm.tournamentStage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Phase</span></dt>
+        <dd>
+            <span>{{vm.tournamentStage.phase}}</span>
+        </dd>
+        <dt><span>Phase Code</span></dt>
+        <dd>
+            <span>{{vm.tournamentStage.phaseCode}}</span>
+        </dd>
+        <dt><span>First Player</span></dt>
+        <dd>
+            <a ui-sref="player-detail({id:vm.tournamentStage.firstPlayerId})">{{vm.tournamentStage.firstPlayerId}}</a>
+        </dd>
+        <dt><span>Second Player</span></dt>
+        <dd>
+            <a ui-sref="player-detail({id:vm.tournamentStage.secondPlayerId})">{{vm.tournamentStage.secondPlayerId}}</a>
+        </dd>
+        <dt><span>Winner</span></dt>
+        <dd>
+            <a ui-sref="player-detail({id:vm.tournamentStage.winnerId})">{{vm.tournamentStage.winnerId}}</a>
+        </dd>
+        <dt><span>Next Stage</span></dt>
+        <dd>
+            <a ui-sref="tournament-stage-detail({id:vm.tournamentStage.nextStageId})">{{vm.tournamentStage.nextStageId}}</a>
+        </dd>
+        <dt><span>Tournament</span></dt>
+        <dd>
+            <a ui-sref="tournament-detail({id:vm.tournamentStage.tournamentId})">{{vm.tournamentStage.tournamentId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="tournament-stage-detail.edit({id:vm.tournamentStage.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>
