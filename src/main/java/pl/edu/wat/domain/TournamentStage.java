@@ -42,6 +42,14 @@ public class TournamentStage implements Serializable {
     @ManyToOne
     private Tournament tournament;
 
+    public TournamentStage() {
+    }
+
+    public TournamentStage(int phaseCode) {
+        this.phase = TournamentPhase.fromInt(phaseCode);
+        this.phaseCode = phaseCode;
+    }
+
     public Long getId() {
         return id;
     }

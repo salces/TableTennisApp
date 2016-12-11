@@ -13,6 +13,8 @@ import java.util.List;
 public interface TournamentMapper {
 
     @Mapping(source = "image.id", target = "imageId")
+    @Mapping(target = "phase", ignore = true)
+    @Mapping(target = "chosenPlayers", ignore = true )
     TournamentDTO tournamentToTournamentDTO(Tournament tournament);
 
     List<TournamentDTO> tournamentsToTournamentDTOs(List<Tournament> tournaments);

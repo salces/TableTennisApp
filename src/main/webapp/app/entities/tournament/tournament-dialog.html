@@ -35,8 +35,8 @@
 
         <div class="form-group">
             <label class="control-label" for="field_phase">Phase</label>
-            <select class="form-control" name="phase" ng-model="vm.tournament.phase" id="field_phase" required>
-                <option value="1">Finał</option>
+            <select class="form-control" name="phase" ng-model="vm.tournament.phase" id="field_phase" ng-change="vm.changeChosenPlayersColor()" required>
+                <option value="1" selected>Finał</option>
                 <option value="2">1/2</option>
                 <option value="4">1/4</option>
                 <option value="8">1/8</option>
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <label for="chosenPlayersGridId">Chosen players</label>
+                <label for="chosenPlayersGridId">Chosen players: <span style="{{vm.chosenPlayersColor}}">{{vm.chosenPlayers.length}}</span>/{{vm.tournament.phase * 2}}</label>
                 <div class="form-group">
                     <div id="chosenPlayersGridId" class="grid" ui-grid="chosenPlayersGrid" ui-grid-pagination></div>
                 </div>

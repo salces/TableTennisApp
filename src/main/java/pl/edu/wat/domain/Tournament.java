@@ -1,6 +1,7 @@
 package pl.edu.wat.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.edu.wat.domain.exceptions.TooManyPhasesOfSameTypeException;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -33,6 +34,28 @@ public class Tournament implements Serializable {
     @OneToMany(mappedBy = "tournament")
     @JsonIgnore
     private Set<TournamentStage> stages = new HashSet<>();
+
+    public Tournament() {
+    }
+
+    public Tournament(String name, Image image) {
+        this.name = name;
+        this.image = image;
+    }
+
+    public void addStage(TournamentStage s) throws TooManyPhasesOfSameTypeException {
+        checkIfNotTooManySamePhases(s);
+        stages.add(s);
+    }
+
+    private void checkIfNotTooManySamePhases(TournamentStage stage) throws TooManyPhasesOfSameTypeException {
+        long stagesPerPhase = stages.stream()
+            .filter(s -> s.getPhase() == stage.getPhase())
+            .count();
+        if (stagesPerPhase >= stage.getPhaseCode()) {
+            throw new TooManyPhasesOfSameTypeException();
+        }
+    }
 
     public Long getId() {
         return id;

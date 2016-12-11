@@ -3,6 +3,7 @@ package pl.edu.wat.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Objects;
 
@@ -18,9 +19,14 @@ public class TournamentDTO implements Serializable {
     @Size(min = 2, max = 25)
     private String name;
 
-
     private Long imageId;
-    
+
+    private int phase;
+
+    private List<Long> chosenPlayers;
+
+
+
     public Long getId() {
         return id;
     }
@@ -42,6 +48,22 @@ public class TournamentDTO implements Serializable {
 
     public void setImageId(Long imageId) {
         this.imageId = imageId;
+    }
+
+    public int getPhase() {
+        return phase;
+    }
+
+    public void setPhase(int phase) {
+        this.phase = phase;
+    }
+
+    public List<Long> getChosenPlayers() {
+        return chosenPlayers;
+    }
+
+    public void setChosenPlayers(List<Long> chosenPlayers) {
+        this.chosenPlayers = chosenPlayers;
     }
 
     @Override
@@ -70,6 +92,7 @@ public class TournamentDTO implements Serializable {
         return "TournamentDTO{" +
             "id=" + id +
             ", name='" + name + "'" +
+            ", playersIds='" + chosenPlayers + "'" +
             '}';
     }
 }

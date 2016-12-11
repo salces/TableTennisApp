@@ -1,4 +1,3 @@
-
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
@@ -11,24 +10,24 @@
         <div class="form-group" ng-show="vm.player.id">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.player.id" readonly />
+                   ng-model="vm.player.id" readonly/>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.player.name"
-                    required ng-minlength="2" ng-maxlength="25" />
+                   ng-model="vm.player.name"
+                   required ng-minlength="2" ng-maxlength="25"/>
             <div ng-show="editForm.name.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.name.$error.required">
+                   ng-show="editForm.name.$error.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.name.$error.minlength" translate-value-min="2">
+                   ng-show="editForm.name.$error.minlength" translate-value-min="2">
                     This field is required to be at least 2 characters.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.name.$error.maxlength">
+                   ng-show="editForm.name.$error.maxlength">
                     This field cannot be longer than 25 characters.
                 </p>
             </div>
@@ -36,63 +35,61 @@
         <div class="form-group">
             <label class="control-label" for="field_surname">Surname</label>
             <input type="text" class="form-control" name="surname" id="field_surname"
-                    ng-model="vm.player.surname"
-                    required ng-minlength="2" ng-maxlength="25" />
+                   ng-model="vm.player.surname"
+                   required ng-minlength="2" ng-maxlength="25"/>
             <div ng-show="editForm.surname.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.surname.$error.required">
+                   ng-show="editForm.surname.$error.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.surname.$error.minlength" translate-value-min="2">
+                   ng-show="editForm.surname.$error.minlength" translate-value-min="2">
                     This field is required to be at least 2 characters.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.surname.$error.maxlength">
+                   ng-show="editForm.surname.$error.maxlength">
                     This field cannot be longer than 25 characters.
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_nationality">Nationality</label>
-            <input type="text" class="form-control" name="nationality" id="field_nationality"
+            <!--<input type="text" class="form-control" name="nationality" id="field_nationality"-->
+            <!--ng-model="vm.player.nationality"-->
+            <!--required ng-minlength="2" ng-maxlength="25" />-->
+            <select class="form-control" name="nationality" id="field_nationality"
                     ng-model="vm.player.nationality"
-                    required ng-minlength="2" ng-maxlength="25" />
+                    ng-options="nationality for nationality in vm.nationalities"
+                    required>
+                <option value=""></option>
+            </select>
             <div ng-show="editForm.nationality.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.nationality.$error.required">
+                   ng-show="editForm.nationality.$error.required">
                     This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.nationality.$error.minlength" translate-value-min="2">
-                    This field is required to be at least 2 characters.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.nationality.$error.maxlength">
-                    This field cannot be longer than 25 characters.
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_height">Height</label>
             <input type="number" class="form-control" name="height" id="field_height"
-                    ng-model="vm.player.height"
-                    required min="140" max="240" />
+                   ng-model="vm.player.height"
+                   required min="140" max="240"/>
             <div ng-show="editForm.height.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.height.$error.required">
+                   ng-show="editForm.height.$error.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.height.$error.min" translate-value-min="140">
+                   ng-show="editForm.height.$error.min" translate-value-min="140">
                     This field should be more than 140.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.height.$error.max">
+                   ng-show="editForm.height.$error.max">
                     This field cannot be more than 240.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.height.$error.number">
+                   ng-show="editForm.height.$error.number">
                     This field should be a number.
                 </p>
             </div>
@@ -100,19 +97,22 @@
 
         <div class="form-group">
             <label for="field_manager">Manager</label>
-            <select class="form-control" id="field_manager" name="manager" ng-model="vm.player.managerId" ng-options="user.id as user.login for user in vm.users"            >
+            <select class="form-control" id="field_manager" name="manager" ng-model="vm.player.managerId"
+                    ng-options="user.id as user.login for user in vm.users">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label for="field_club">Club</label>
-            <select class="form-control" id="field_club" name="club" ng-model="vm.player.clubId" ng-options="club.id as club.prefix for club in vm.clubs"            >
+            <select class="form-control" id="field_club" name="club" ng-model="vm.player.clubId"
+                    ng-options="club.id as club.prefix for club in vm.clubs">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label for="field_image">Image</label>
-            <select class="form-control" id="field_image" name="image" ng-model="vm.player.imageId" ng-options="image.id as image.alias for image in vm.images"            >
+            <select class="form-control" id="field_image" name="image" ng-model="vm.player.imageId"
+                    ng-options="image.id as image.alias for image in vm.images">
                 <option value=""></option>
             </select>
         </div>

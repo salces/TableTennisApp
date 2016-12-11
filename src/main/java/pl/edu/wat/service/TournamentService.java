@@ -1,7 +1,14 @@
 package pl.edu.wat.service;
 
+import pl.edu.wat.domain.Image;
+import pl.edu.wat.domain.Player;
 import pl.edu.wat.domain.Tournament;
+import pl.edu.wat.domain.TournamentStage;
+import pl.edu.wat.domain.enumeration.TournamentPhase;
+import pl.edu.wat.repository.ImageRepository;
+import pl.edu.wat.repository.PlayerRepository;
 import pl.edu.wat.repository.TournamentRepository;
+import pl.edu.wat.repository.TournamentStageRepository;
 import pl.edu.wat.service.dto.TournamentDTO;
 import pl.edu.wat.service.mapper.TournamentMapper;
 import org.slf4j.Logger;
@@ -12,8 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -24,12 +30,21 @@ import java.util.stream.Collectors;
 public class TournamentService {
 
     private final Logger log = LoggerFactory.getLogger(TournamentService.class);
-    
+
     @Inject
     private TournamentRepository tournamentRepository;
 
     @Inject
     private TournamentMapper tournamentMapper;
+
+    @Inject
+    private PlayerRepository playerRepository;
+
+    @Inject
+    private ImageRepository imageRepository;
+
+    @Inject
+    private TournamentStageRepository tournamentStageRepository;
 
     /**
      * Save a tournament.
@@ -39,19 +54,23 @@ public class TournamentService {
      */
     public TournamentDTO save(TournamentDTO tournamentDTO) {
         log.debug("Request to save Tournament : {}", tournamentDTO);
-        Tournament tournament = tournamentMapper.tournamentDTOToTournament(tournamentDTO);
+        if (!isModelCorrect(tournamentDTO)) {
+            throw new RuntimeException();
+        }
+
+        Tournament tournament = createTournament(tournamentDTO);
         tournament = tournamentRepository.save(tournament);
         TournamentDTO result = tournamentMapper.tournamentToTournamentDTO(tournament);
         return result;
     }
 
     /**
-     *  Get all the tournaments.
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * Get all the tournaments.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<TournamentDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Tournaments");
         Page<Tournament> result = tournamentRepository.findAll(pageable);
@@ -59,12 +78,12 @@ public class TournamentService {
     }
 
     /**
-     *  Get one tournament by id.
+     * Get one tournament by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public TournamentDTO findOne(Long id) {
         log.debug("Request to get Tournament : {}", id);
         Tournament tournament = tournamentRepository.findOne(id);
@@ -73,12 +92,51 @@ public class TournamentService {
     }
 
     /**
-     *  Delete the  tournament by id.
+     * Delete the  tournament by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete Tournament : {}", id);
         tournamentRepository.delete(id);
+    }
+
+
+    private Tournament createTournament(TournamentDTO tournamentDTO) {
+        System.out.println(tournamentDTO);
+        List<Player> players = new ArrayList<>();
+        tournamentDTO.getChosenPlayers()
+            .forEach(id ->
+                players.add(playerRepository.findOne(id))
+            );
+        Collections.shuffle(players);
+
+        Image image = null;
+        if (tournamentDTO.getImageId() != null)
+            imageRepository.findOne(tournamentDTO.getImageId());
+
+        Tournament tournament = new Tournament(tournamentDTO.getName(), image);
+
+        int phase = tournamentDTO.getPhase();
+
+        for (int i = 0; i < phase; i++) {
+            TournamentStage stage = new TournamentStage(phase);
+            stage.setFirstPlayer(players.get(i));
+            stage.setSecondPlayer(players.get(i + phase));
+            TournamentStage savedStage = tournamentStageRepository.saveAndFlush(stage);
+            tournament.addStage(savedStage);
+        }
+        return tournament;
+    }
+
+    private boolean isModelCorrect(TournamentDTO tournamentDTO) {
+        if (tournamentDTO.getPhase() * 2 != tournamentDTO.getChosenPlayers().size()) {
+            return false;
+        }
+
+        if (tournamentDTO.getName() == null || tournamentDTO.getName().equals("")) {
+            return false;
+        }
+        return true;
     }
 }
