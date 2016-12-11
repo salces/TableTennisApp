@@ -20,7 +20,6 @@ public interface TournamentMapper {
     List<TournamentDTO> tournamentsToTournamentDTOs(List<Tournament> tournaments);
 
     @Mapping(source = "imageId", target = "image")
-    @Mapping(target = "stages", ignore = true)
     Tournament tournamentDTOToTournament(TournamentDTO tournamentDTO);
 
     List<Tournament> tournamentDTOsToTournaments(List<TournamentDTO> tournamentDTOs);

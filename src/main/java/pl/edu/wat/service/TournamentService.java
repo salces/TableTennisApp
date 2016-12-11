@@ -103,7 +103,6 @@ public class TournamentService {
 
 
     private Tournament createTournament(TournamentDTO tournamentDTO) {
-        System.out.println(tournamentDTO);
         List<Player> players = new ArrayList<>();
         tournamentDTO.getChosenPlayers()
             .forEach(id ->

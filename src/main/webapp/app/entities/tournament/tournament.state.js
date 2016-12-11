@@ -177,32 +177,29 @@
                 }]
             })
             .state('tournament-ladder', {
-                parent: 'entity',
+                parent: 'tournament-detail',
                 url: '/tournament/ladder/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'Tournament'
                 },
-                views: {
-                    'content@': {
+                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
+                    $uibModal.open({
                         templateUrl: 'app/entities/tournament/tournament-ladder-dialog.html',
                         controller: 'TournamentLadderDialogController',
-                        controllerAs: 'vm'
-                    }
-                },
-                resolve: {
-                    entity: ['$stateParams', 'Tournament', function ($stateParams, Tournament) {
-                        return Tournament.get({id: $stateParams.id}).$promise;
-                    }],
-                    previousState: ["$state", function ($state) {
-                        var currentStateData = {
-                            name: $state.current.name || 'tournament',
-                            params: $state.params,
-                            url: $state.href($state.current.name, $state.params)
-                        };
-                        return currentStateData;
-                    }]
-                }
+                        controllerAs: 'vm',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['Tournament', function (Tournament) {
+                                return Tournament.get({id: $stateParams.id}).$promise;
+                            }]
+                        }
+                    }).result.then(function () {
+                        $state.go('tournament', null, {reload: 'tournament'});
+                    }, function () {
+                        $state.go('^');
+                    });
+                }]
             });
     }
 

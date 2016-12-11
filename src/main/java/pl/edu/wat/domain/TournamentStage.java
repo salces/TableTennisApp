@@ -5,11 +5,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import pl.edu.wat.domain.enumeration.TournamentPhase;
 
-/**
- * A TournamentStage.
- */
 @Entity
 @Table(name = "tournament_stage")
 public class TournamentStage implements Serializable {
@@ -28,9 +27,11 @@ public class TournamentStage implements Serializable {
     private Integer phaseCode;
 
     @ManyToOne
+    @JsonInclude
     private Player firstPlayer;
 
     @ManyToOne
+    @JsonInclude
     private Player secondPlayer;
 
     @ManyToOne
@@ -40,6 +41,7 @@ public class TournamentStage implements Serializable {
     private TournamentStage nextStage;
 
     @ManyToOne
+    @JsonIgnore
     private Tournament tournament;
 
     public TournamentStage() {
@@ -177,4 +179,6 @@ public class TournamentStage implements Serializable {
             ", phaseCode='" + phaseCode + "'" +
             '}';
     }
+
+
 }

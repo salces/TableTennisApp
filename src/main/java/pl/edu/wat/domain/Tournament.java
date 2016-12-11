@@ -32,7 +32,7 @@ public class Tournament implements Serializable {
     private Image image;
 
     @OneToMany(mappedBy = "tournament")
-    @JsonIgnore
+//    @JsonIgnore
     private Set<TournamentStage> stages = new HashSet<>();
 
     public Tournament() {

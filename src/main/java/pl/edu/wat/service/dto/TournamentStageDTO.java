@@ -20,15 +20,24 @@ public class TournamentStageDTO implements Serializable {
 
 
     private Long firstPlayerId;
-    
+
     private Long secondPlayerId;
-    
+
     private Long winnerId;
-    
+
     private Long nextStageId;
-    
+
+
     private Long tournamentId;
-    
+
+    private String firstPlayerName;
+
+    private String secondPlayerName;
+
+    private String firstPlayerSurname;
+
+    private String secondPlayerSurname;
+
     public Long getId() {
         return id;
     }
@@ -90,6 +99,40 @@ public class TournamentStageDTO implements Serializable {
     public void setTournamentId(Long tournamentId) {
         this.tournamentId = tournamentId;
     }
+
+    public String getFirstPlayerSurname() {
+        return firstPlayerSurname;
+    }
+
+    public void setFirstPlayerSurname(String firstPlayerSurname) {
+        this.firstPlayerSurname = firstPlayerSurname;
+    }
+
+    public String getSecondPlayerSurname() {
+        return secondPlayerSurname;
+    }
+
+    public void setSecondPlayerSurname(String secondPlayerSurname) {
+        this.secondPlayerSurname = secondPlayerSurname;
+    }
+
+    public String getFirstPlayerName() {
+        return firstPlayerName;
+    }
+
+    public void setFirstPlayerName(String firstPlayerName) {
+        this.firstPlayerName = firstPlayerName;
+    }
+
+    public String getSecondPlayerName() {
+        return secondPlayerName;
+    }
+
+    public void setSecondPlayerName(String secondPlayerName) {
+        this.secondPlayerName = secondPlayerName;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

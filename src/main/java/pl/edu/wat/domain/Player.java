@@ -1,6 +1,10 @@
 package pl.edu.wat.domain;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -11,6 +15,9 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "player")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Player implements Serializable {
 
     private static final long serialVersionUID = 1L;
