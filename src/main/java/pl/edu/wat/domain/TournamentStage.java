@@ -5,12 +5,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.NoArgsConstructor;
 import pl.edu.wat.domain.enumeration.TournamentPhase;
 
+/**
+ * A TournamentStage.
+ */
 @Entity
 @Table(name = "tournament_stage")
+@NoArgsConstructor
 public class TournamentStage implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,11 +30,9 @@ public class TournamentStage implements Serializable {
     private Integer phaseCode;
 
     @ManyToOne
-    @JsonInclude
     private Player firstPlayer;
 
     @ManyToOne
-    @JsonInclude
     private Player secondPlayer;
 
     @ManyToOne
@@ -41,15 +42,15 @@ public class TournamentStage implements Serializable {
     private TournamentStage nextStage;
 
     @ManyToOne
-    @JsonIgnore
     private Tournament tournament;
 
-    public TournamentStage() {
-    }
+    @OneToOne
+    @JoinColumn(unique = true)
+    private TournamentMatch tournamentMatch;
 
-    public TournamentStage(int phaseCode) {
-        this.phase = TournamentPhase.fromInt(phaseCode);
-        this.phaseCode = phaseCode;
+    public TournamentStage(int phase){
+        this.phaseCode = phase;
+        this.phase = TournamentPhase.fromInt(phase);
     }
 
     public Long getId() {
@@ -151,6 +152,19 @@ public class TournamentStage implements Serializable {
         this.tournament = tournament;
     }
 
+    public TournamentMatch getTournamentMatch() {
+        return tournamentMatch;
+    }
+
+    public TournamentStage tournamentMatch(TournamentMatch tournamentMatch) {
+        this.tournamentMatch = tournamentMatch;
+        return this;
+    }
+
+    public void setTournamentMatch(TournamentMatch tournamentMatch) {
+        this.tournamentMatch = tournamentMatch;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -179,6 +193,4 @@ public class TournamentStage implements Serializable {
             ", phaseCode='" + phaseCode + "'" +
             '}';
     }
-
-
 }

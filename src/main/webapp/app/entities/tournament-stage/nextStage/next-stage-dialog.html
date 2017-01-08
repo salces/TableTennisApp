@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myTournamentLabel">Create or edit a Tournament</h4>
+</div>
+<div class="modal-body">
+    <table class="table table-striped">
+        <th>Gracz</th>
+        <th>Wynik</th>
+        <tr>
+            <td>{{vm.stage.firstPlayer}}</td>
+            <td><input type="number" min="0" max="3" ng-model="vm.result.firstPlayerScore" ></td>
+        </tr>
+        <tr>
+            <td>{{vm.stage.secondPlayer}}</td>
+            <td><input type="number" min="0" max="3" ng-model="vm.result.secondPlayerScore"></td>
+        </tr>
+    </table>
+    <input type="button" value="Dodaj wynik" class="btn btn-success" ng-click="vm.saveResult()">
+</div>

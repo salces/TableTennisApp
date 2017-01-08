@@ -5,9 +5,9 @@
         .module('tableTennisApp')
         .controller('TournamentStageDialogController', TournamentStageDialogController);
 
-    TournamentStageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'TournamentStage', 'Player', 'Tournament'];
+    TournamentStageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'TournamentStage', 'Player', 'Tournament', 'TournamentMatch'];
 
-    function TournamentStageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, TournamentStage, Player, Tournament) {
+    function TournamentStageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, TournamentStage, Player, Tournament, TournamentMatch) {
         var vm = this;
 
         vm.tournamentStage = entity;
@@ -16,6 +16,15 @@
         vm.players = Player.query();
         vm.tournamentstages = TournamentStage.query();
         vm.tournaments = Tournament.query();
+        vm.tournamentmatches = TournamentMatch.query({filter: 'tournamentstage-is-null'});
+        $q.all([vm.tournamentStage.$promise, vm.tournamentmatches.$promise]).then(function() {
+            if (!vm.tournamentStage.tournamentMatchId) {
+                return $q.reject();
+            }
+            return TournamentMatch.get({id : vm.tournamentStage.tournamentMatchId}).$promise;
+        }).then(function(tournamentMatch) {
+            vm.tournamentmatches.push(tournamentMatch);
+        });
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

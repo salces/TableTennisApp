@@ -17,10 +17,7 @@ public interface TournamentStageMapper {
     @Mapping(source = "winner.id", target = "winnerId")
     @Mapping(source = "nextStage.id", target = "nextStageId")
     @Mapping(source = "tournament.id", target = "tournamentId")
-    @Mapping(source = "firstPlayer.name", target = "firstPlayerName")
-    @Mapping(source = "firstPlayer.surname", target = "firstPlayerSurname")
-    @Mapping(source = "secondPlayer.name", target = "secondPlayerName")
-    @Mapping(source = "secondPlayer.surname", target = "secondPlayerSurname")
+    @Mapping(source = "tournamentMatch.id", target = "tournamentMatchId")
     TournamentStageDTO tournamentStageToTournamentStageDTO(TournamentStage tournamentStage);
 
     List<TournamentStageDTO> tournamentStagesToTournamentStageDTOs(List<TournamentStage> tournamentStages);
@@ -30,6 +27,7 @@ public interface TournamentStageMapper {
     @Mapping(source = "winnerId", target = "winner")
     @Mapping(source = "nextStageId", target = "nextStage")
     @Mapping(source = "tournamentId", target = "tournament")
+    @Mapping(source = "tournamentMatchId", target = "tournamentMatch")
     TournamentStage tournamentStageDTOToTournamentStage(TournamentStageDTO tournamentStageDTO);
 
     List<TournamentStage> tournamentStageDTOsToTournamentStages(List<TournamentStageDTO> tournamentStageDTOs);
@@ -59,5 +57,14 @@ public interface TournamentStageMapper {
         Tournament tournament = new Tournament();
         tournament.setId(id);
         return tournament;
+    }
+
+    default TournamentMatch tournamentMatchFromId(Long id) {
+        if (id == null) {
+            return null;
+        }
+        TournamentMatch tournamentMatch = new TournamentMatch();
+        tournamentMatch.setId(id);
+        return tournamentMatch;
     }
 }

@@ -1,7 +1,6 @@
 package pl.edu.wat.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import pl.edu.wat.domain.TournamentStage;
 import pl.edu.wat.service.TournamentStageService;
 import pl.edu.wat.web.rest.util.HeaderUtil;
 import pl.edu.wat.web.rest.util.PaginationUtil;
@@ -22,7 +21,6 @@ import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -33,7 +31,7 @@ import java.util.stream.Collectors;
 public class TournamentStageResource {
 
     private final Logger log = LoggerFactory.getLogger(TournamentStageResource.class);
-
+        
     @Inject
     private TournamentStageService tournamentStageService;
 
@@ -112,10 +110,14 @@ public class TournamentStageResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public Set<TournamentStage> findAllForTournament(@PathVariable Long id) {
+    public ResponseEntity<TournamentStageDTO> getTournamentStage(@PathVariable Long id) {
         log.debug("REST request to get TournamentStage : {}", id);
-        Set<TournamentStage> stages = tournamentStageService.findAllForTournament(id);
-        return stages;
+        TournamentStageDTO tournamentStageDTO = tournamentStageService.findOne(id);
+        return Optional.ofNullable(tournamentStageDTO)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     /**
@@ -133,6 +135,5 @@ public class TournamentStageResource {
         tournamentStageService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("tournamentStage", id.toString())).build();
     }
-
 
 }

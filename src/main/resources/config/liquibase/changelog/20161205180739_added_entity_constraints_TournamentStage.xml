@@ -38,5 +38,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="tournament"/>
 
+        <addForeignKeyConstraint baseColumnNames="tournament_match_id"
+                                 baseTableName="tournament_stage"
+                                 constraintName="fk_tournament_stage_tournament_match_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tournament_match"/>
+
     </changeSet>
 </databaseChangeLog>

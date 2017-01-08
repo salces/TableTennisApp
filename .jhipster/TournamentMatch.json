@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "tournamentStage",
+            "otherEntityName": "tournamentStage",
+            "relationshipType": "one-to-one",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "tournamentMatch"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "firstPlayerScore",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "secondPlayerScore",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170108163033",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "tournament_match",
+    "pagination": "no"
+}

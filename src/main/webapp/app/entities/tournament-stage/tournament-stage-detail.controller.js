@@ -5,9 +5,9 @@
         .module('tableTennisApp')
         .controller('TournamentStageDetailController', TournamentStageDetailController);
 
-    TournamentStageDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'TournamentStage', 'Player', 'Tournament'];
+    TournamentStageDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'TournamentStage', 'Player', 'Tournament', 'TournamentMatch'];
 
-    function TournamentStageDetailController($scope, $rootScope, $stateParams, previousState, entity, TournamentStage, Player, Tournament) {
+    function TournamentStageDetailController($scope, $rootScope, $stateParams, previousState, entity, TournamentStage, Player, Tournament, TournamentMatch) {
         var vm = this;
 
         vm.tournamentStage = entity;

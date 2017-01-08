@@ -14,43 +14,21 @@
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
     <!--
-        Added the entity TournamentStage.
+        Added the entity TournamentMatch.
     -->
-    <changeSet id="20161205180739-1" author="jhipster">
-        <createTable tableName="tournament_stage">
+    <changeSet id="20170108163033-1" author="jhipster">
+        <createTable tableName="tournament_match">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="phase" type="varchar(255)">
-                <constraints nullable="true" />
+            <column name="first_player_score" type="integer">
+                <constraints nullable="false" />
             </column>
             
-            <column name="phase_code" type="integer">
-                <constraints nullable="true" />
+            <column name="second_player_score" type="integer">
+                <constraints nullable="false" />
             </column>
             
-            <column name="first_player_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="second_player_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="winner_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="next_stage_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="tournament_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="tournament_match_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         

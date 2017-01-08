@@ -30,6 +30,14 @@
             "otherEntityName": "tournament",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "tournamentMatch",
+            "otherEntityName": "tournamentMatch",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "tournamentStage"
         }
     ],
     "fields": [

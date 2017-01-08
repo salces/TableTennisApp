@@ -5,19 +5,19 @@
         .module('tableTennisApp')
         .controller('TournamentLadderDialogController', TournamentLadderDialogController);
 
-    TournamentLadderDialogController.$inject = ['entity', 'TournamentStage', '$uibModalInstance'];
+    TournamentLadderDialogController.$inject = ['entity', 'TournamentStage', '$uibModalInstance', '$uibModal'];
 
-    function TournamentLadderDialogController(entity, TournamentStage, $uibModalInstance) {
+    function TournamentLadderDialogController(entity, TournamentStage, $uibModalInstance, $uibModal) {
         var vm = this;
         vm.tournament = entity;
         vm.tournamentStage = TournamentStage;
         vm.clear = clear;
 
         $uibModalInstance.rendered.then(function () {
-            TournamentStage.get(vm.tournament.id).$promise.then(success,error);
+            TournamentStage.get(vm.tournament.id).$promise.then(success, error);
 
-            function success(data,headers) {
-                var ladderDrawer = new LadderDrawer(data);
+            function success(data, headers) {
+                var ladderDrawer = new LadderDrawer(data, $uibModal);
                 ladderDrawer.draw();
             }
 
@@ -31,14 +31,15 @@
         }
     }
 
-    function LadderDrawer(stages) {
+    function LadderDrawer(stages, $uibModal) {
         var vm = this;
         vm.stages = stages;
         vm.draw = draw;
+        vm.nodeDataArray = [];
 
         function draw() {
             var $ = go.GraphObject.make;
-            var myDiagram =
+            vm.myDiagram =
                 $(go.Diagram, "ladder",
                     {
                         initialContentAlignment: go.Spot.TopLeft,
@@ -48,10 +49,10 @@
                     }
                 );
 
-            var nodeDataArray = transformStages(stages);
-            var myModel = new go.TreeModel(nodeDataArray);
+            vm.nodeDataArray = transformStages(stages);
+            var myModel = new go.TreeModel(vm.nodeDataArray);
 
-            myDiagram.nodeTemplate =
+            vm.myDiagram.nodeTemplate =
                 $(go.Node, "Vertical", {background: "#44CCFF"},
                     $(go.TextBlock, "Default Text",
                         {margin: 6, stroke: "white", font: "bold 16px sans-serif"},
@@ -59,13 +60,17 @@
                     $(go.Shape, {figure: "LineH", fill: "lightgreen"}),
                     $(go.TextBlock, "Default Text",
                         {margin: 6, stroke: "white", font: "bold 16px sans-serif"},
-                        new go.Binding("text", "secondPlayer"))
-                );
-            myDiagram.linkTemplate =$(go.Link,
-                                    {routing: go.Link.Orthogonal, corner: 5},
-                                    $(go.Shape));
+                        new go.Binding("text", "secondPlayer")),
+                    {
+                        doubleClick: addMatchResult
+                    }
+                )
+            ;
+            vm.myDiagram.linkTemplate = $(go.Link,
+                {routing: go.Link.Orthogonal, corner: 5},
+                $(go.Shape));
 
-            myDiagram.model = myModel;
+            vm.myDiagram.model = myModel;
         }
 
         function transformStages(stages) {
@@ -77,12 +82,26 @@
                     secondPlayer: stages[i].secondPlayerName + stages[i].secondPlayerSurname,
                 };
 
-                if(stages[i].nextStageId != null){
+                if (stages[i].nextStageId != null) {
                     stage.parent = stages[i].nextStageId;
                 }
                 newStages.push(stage);
             }
             return newStages;
+        }
+
+        function addMatchResult(e, node) {
+            $uibModal.open({
+                templateUrl: 'app/entities/tournament-stage/nextStage/next-stage-dialog.html',
+                controller: 'NextStageDialogController',
+                controllerAs: 'vm',
+                resolve: {
+                    Stage : node.de,
+                    LadderDrawer: vm
+                }
+            });
+            console.log(e);
+            console.log(node.de);
         }
     }
 

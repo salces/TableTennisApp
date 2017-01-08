@@ -10,6 +10,7 @@
     <include file="classpath:config/liquibase/changelog/20161204170354_added_entity_Image.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161205180739_added_entity_TournamentStage.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161205181335_added_entity_Tournament.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170108163033_added_entity_TournamentMatch.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20161204164335_added_entity_constraints_Player.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161204164921_added_entity_constraints_Club.xml" relativeToChangelogFile="false"/>

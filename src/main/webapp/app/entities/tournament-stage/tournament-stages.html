@@ -26,6 +26,7 @@
                     <th jh-sort-by="winnerId"><span>Winner</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="nextStageId"><span>Next Stage</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="tournamentId"><span>Tournament</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tournamentMatchId"><span>Tournament Match</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -48,6 +49,9 @@
                     </td>
                     <td>
                         <a ui-sref="tournament-detail({id:tournamentStage.tournamentId})">{{tournamentStage.tournamentId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="tournament-match-detail({id:tournamentStage.tournamentMatchId})">{{tournamentStage.tournamentMatchId}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
