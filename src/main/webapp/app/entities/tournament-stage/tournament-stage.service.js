@@ -12,6 +12,7 @@
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true },
             'get': { method: 'GET', isArray: true },
+            'nextStage':{ method: 'POST' },
             'update': { method:'PUT' }
         });
     }

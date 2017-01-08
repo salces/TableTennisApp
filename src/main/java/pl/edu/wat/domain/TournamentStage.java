@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import pl.edu.wat.domain.enumeration.TournamentPhase;
 
 /**
@@ -41,7 +43,8 @@ public class TournamentStage implements Serializable {
     @ManyToOne
     private TournamentStage nextStage;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID")
     private Tournament tournament;
 
     @OneToOne
@@ -51,6 +54,11 @@ public class TournamentStage implements Serializable {
     public TournamentStage(int phase){
         this.phaseCode = phase;
         this.phase = TournamentPhase.fromInt(phase);
+    }
+
+    public TournamentStage(TournamentPhase phase){
+        this.phase = phase;
+        this.phaseCode = phase.getLvl();
     }
 
     public Long getId() {

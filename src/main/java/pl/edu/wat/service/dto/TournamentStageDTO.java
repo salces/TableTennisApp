@@ -39,6 +39,12 @@ public class TournamentStageDTO implements Serializable {
 
     private String secondPlayerSurname;
 
+    private int firstPlayerScore;
+
+    private int secondPlayerScore;
+
+    private long currentStageId;
+
     public Long getId() {
         return id;
     }
@@ -139,6 +145,30 @@ public class TournamentStageDTO implements Serializable {
 
     public void setSecondPlayerSurname(String secondPlayerSurname) {
         this.secondPlayerSurname = secondPlayerSurname;
+    }
+
+    public int getFirstPlayerScore() {
+        return firstPlayerScore;
+    }
+
+    public void setFirstPlayerScore(int firstPlayerScore) {
+        this.firstPlayerScore = firstPlayerScore;
+    }
+
+    public int getSecondPlayerScore() {
+        return secondPlayerScore;
+    }
+
+    public void setSecondPlayerScore(int secondPlayerScore) {
+        this.secondPlayerScore = secondPlayerScore;
+    }
+
+    public long getCurrentStageId() {
+        return currentStageId;
+    }
+
+    public void setCurrentStageId(long currentStageId) {
+        this.currentStageId = currentStageId;
     }
 
     @Override

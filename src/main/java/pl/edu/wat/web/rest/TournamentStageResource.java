@@ -1,6 +1,7 @@
 package pl.edu.wat.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.springframework.transaction.annotation.Transactional;
 import pl.edu.wat.service.TournamentStageService;
 import pl.edu.wat.web.rest.util.HeaderUtil;
 import pl.edu.wat.web.rest.util.PaginationUtil;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
 public class TournamentStageResource {
 
     private final Logger log = LoggerFactory.getLogger(TournamentStageResource.class);
-        
+
     @Inject
     private TournamentStageService tournamentStageService;
 
@@ -46,12 +47,13 @@ public class TournamentStageResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<TournamentStageDTO> createTournamentStage(@RequestBody TournamentStageDTO tournamentStageDTO) throws URISyntaxException {
         log.debug("REST request to save TournamentStage : {}", tournamentStageDTO);
-        if (tournamentStageDTO.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("tournamentStage", "idexists", "A new tournamentStage cannot already have an ID")).body(null);
-        }
-        TournamentStageDTO result = tournamentStageService.save(tournamentStageDTO);
+//        if (tournamentStageDTO.getId() != null) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("tournamentStage", "idexists", "A new tournamentStage cannot already have an ID")).body(null);
+//        }
+        TournamentStageDTO result = tournamentStageService.proceedNextStage(tournamentStageDTO);
         return ResponseEntity.created(new URI("/api/tournament-stages/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("tournamentStage", result.getId().toString()))
             .body(result);

@@ -11,5 +11,5 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface TournamentStageRepository extends JpaRepository<TournamentStage,Long> {
-
+    List<TournamentStage> findByTournamentId(Long id);
 }

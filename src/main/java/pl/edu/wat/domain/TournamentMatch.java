@@ -1,6 +1,9 @@
 package pl.edu.wat.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -12,6 +15,9 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "tournament_match")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TournamentMatch implements Serializable {
 
     private static final long serialVersionUID = 1L;

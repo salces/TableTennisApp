@@ -50,4 +50,8 @@ public enum TournamentPhase {
         }
         return lvls;
     }
+
+    public int getLvl() {
+        return lvl;
+    }
 }
