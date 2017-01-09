@@ -43,6 +43,51 @@ public class PlayerInitializer {
                 .name("Galileo")
                 .surname("Galilei")
                 .nationality("Italy")
+                .height(201).build(),
+            Player.builder()
+                .name("Immanuel")
+                .surname("Kant")
+                .nationality("Germany")
+                .height(158).build(),
+            Player.builder()
+                .name("Stefan")
+                .surname("Banach")
+                .nationality("Poland")
+                .height(221).build(),
+            Player.builder()
+                .name("Stanislaw")
+                .surname("Ulam")
+                .nationality("Poland")
+                .height(192).build(),
+            Player.builder()
+                .name("Albert")
+                .surname("Einstein")
+                .nationality("Germany")
+                .height(201).build(),
+            Player.builder()
+                .name("Galileo")
+                .surname("Galilei")
+                .nationality("Italy")
+                .height(201).build(),
+            Player.builder()
+                .name("Nikola")
+                .surname("Tesla")
+                .nationality("Serbia")
+                .height(201).build(),
+            Player.builder()
+                .name("Galileo")
+                .surname("Galilei")
+                .nationality("Italy")
+                .height(175).build(),
+            Player.builder()
+                .name("Mikolaj")
+                .surname("Kopernik")
+                .nationality("Poland")
+                .height(184).build(),
+            Player.builder()
+                .name("Ignacy")
+                .surname("Lukasiewicz")
+                .nationality("Poland")
                 .height(201).build()
         ).forEach(playerRepository::save);
     }

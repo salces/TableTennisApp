@@ -97,12 +97,43 @@ public class TournamentStageService {
 
     public TournamentStageDTO proceedNextStage(TournamentStageDTO tournamentStageDTO){
         TournamentStageDTO proceededStage = null;
+
+        if(isFinalStage(tournamentStageDTO)){
+            proceededStage = proceedFinalStage(tournamentStageDTO);
+        } else
         if(doesAlreadyExist(tournamentStageDTO)){
             proceededStage = proceedExistingTournament(tournamentStageDTO);
         } else {
             proceededStage = proceedNewNextStage(tournamentStageDTO);
         }
         return proceededStage;
+    }
+
+    @Transactional
+    private TournamentStageDTO proceedFinalStage(TournamentStageDTO tournamentStageDTO) {
+        TournamentStage currentTournamentStage =
+            tournamentStageRepository.findOne(tournamentStageDTO.getCurrentStageId());
+        TournamentMatch tournamentMatch = TournamentMatch.builder()
+            .tournamentStage(currentTournamentStage)
+            .firstPlayerScore(tournamentStageDTO.getFirstPlayerScore())
+            .secondPlayerScore(tournamentStageDTO.getSecondPlayerScore())
+            .build();
+        currentTournamentStage.setTournamentMatch(tournamentMatch);
+
+        tournamentMatchRepository.save(tournamentMatch);
+        tournamentStageRepository.save(currentTournamentStage);
+        return tournamentStageMapper.tournamentStageToTournamentStageDTO(currentTournamentStage);
+    }
+
+    @Transactional
+    private boolean isFinalStage(TournamentStageDTO tournamentStageDTO) {
+        TournamentStage currentTournamentStage =
+            tournamentStageRepository.findOne(tournamentStageDTO.getCurrentStageId());
+        if(currentTournamentStage.getPhase() == TournamentPhase.FINAL){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Transactional

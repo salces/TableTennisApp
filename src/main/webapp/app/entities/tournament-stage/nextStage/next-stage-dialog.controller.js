@@ -5,9 +5,9 @@
         .module('tableTennisApp')
         .controller('NextStageDialogController', NextStageDialogController);
 
-    NextStageDialogController.$inject = [ 'TournamentStage','TournamentLadderService', '$uibModalInstance', 'Stage', 'LadderDrawer'];
+    NextStageDialogController.$inject = ['TournamentStage', 'TournamentLadderService', '$uibModalInstance', 'Stage', 'LadderDrawer'];
 
-    function NextStageDialogController(TournamentStage,TournamentLadderService , $uibModalInstance, Stage, LadderDrawer) {
+    function NextStageDialogController(TournamentStage, TournamentLadderService, $uibModalInstance, Stage, LadderDrawer) {
         var vm = this;
         vm.stage = Stage;
         vm.TournamentLadderService = TournamentLadderService;
@@ -26,13 +26,17 @@
             TournamentStage.nextStage(vm.result).$promise.then(function success(response) {
                 console.log('Logging success response')
                 console.log(response)
-                vm.TournamentLadderService.addStage(vm.stage,response);
+                // if(shouldSave(response)){
+                    vm.TournamentLadderService.addStage(vm.stage, response);
+                // }
             }, function error(response) {
                 console.log('Logging error response')
                 console.log(response)
             });
             $uibModalInstance.dismiss();
         }
+
+
     }
 
 })();

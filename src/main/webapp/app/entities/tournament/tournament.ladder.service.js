@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
     angular
         .module('tableTennisApp')
@@ -6,13 +6,13 @@
 
     TournamentLadderService.$inject = ['$uibModal'];
 
-    function TournamentLadderService ($uibModal) {
+    function TournamentLadderService($uibModal) {
         var vm = this;
         vm.create = create;
 
 
         function create(stages) {
-            vm.ladderDrawer = new LadderDrawer(stages,$uibModal);
+            vm.ladderDrawer = new LadderDrawer(stages, $uibModal);
             vm.draw = vm.ladderDrawer.draw;
             vm.addStage = vm.ladderDrawer.addStage;
         }
@@ -88,49 +88,58 @@
                     controller: 'NextStageDialogController',
                     controllerAs: 'vm',
                     resolve: {
-                        Stage : node.de,
+                        Stage: node.de,
                         LadderDrawer: vm
                     }
                 });
             }
 
             function addStage(prevStage, newStage) {
-                console.log(newStage)
                 vm.myDiagram.startTransaction('add stage');
                 var key;
-                if(!doesExistEmpty()){
+
+                if (!doesExistEmpty() && !isComplete(newStage)) {
                     vm.stages.push(newStage);
                     var transformedStage = transformStage(newStage);
                     vm.myDiagram.model.addNodeData(transformedStage);
                     key = transformedStage.key;
-                    console.log('doesnt exists')
-                } else {
-                    var existingStage = getExisting();
-
-                    vm.myDiagram.model.setDataProperty(existingStage,'secondPlayer', newStage.firstPlayerName + ' ' + newStage.secondPlayerName);
-                    key = existingStage.key;
-                    console.log('exists')
+                } else if (isComplete(newStage) && !doesExistEmpty()) {
                 }
-                vm.myDiagram.model.setDataProperty(prevStage,'parent',key);
+                else {
+                    var existingStage = getExisting();
+                    vm.myDiagram.model.setDataProperty(existingStage, 'secondPlayer', newStage.firstPlayerName + ' ' + newStage.secondPlayerName);
+                    key = existingStage.key;
+                }
+                vm.myDiagram.model.setDataProperty(prevStage, 'parent', key);
 
                 vm.myDiagram.commitTransaction('add stage');
             }
 
             function doesExistEmpty() {
-                for(var i = 0 ; i < vm.nodeDataArray.length; i++){
-                    console.log(vm.stages[i].secondPlayerName)
-                    console.log(vm.stages[i].secondPlayerSurname)
-                    if(vm.nodeDataArray[i].secondPlayer === 'null null'){
+                for (var i = 0; i < vm.nodeDataArray.length; i++) {
+                    if (vm.nodeDataArray[i].secondPlayer === 'null null') {
                         return true;
                     }
                 }
             }
 
             function getExisting() {
-                for(var i = 0 ; i < vm.nodeDataArray.length; i++){
-                    if(vm.nodeDataArray[i].secondPlayer === 'null null'){
+                for (var i = 0; i < vm.nodeDataArray.length; i++) {
+                    if (vm.nodeDataArray[i].secondPlayer === 'null null') {
                         return vm.nodeDataArray[i];
                     }
+                }
+            }
+
+            function isComplete(stage) {
+                if (stage.phase === 'FINAL'
+                    && stage.firstPlayerName != null
+                    && stage.firstPlayerSurname != null
+                    && stage.secondPlayerName != null
+                    && stage.secondPlayerSurname != null) {
+                    return true;
+                } else {
+                    return false;
                 }
             }
 
