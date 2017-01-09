@@ -17,8 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -39,8 +41,8 @@ public class TournamentStageService {
     @Inject
     private TournamentMatchRepository tournamentMatchRepository;
 
-//    @Inject
-//    private TournamentRepository tournamentRepository;
+    @Inject
+    private TournamentRepository tournamentRepository;
 
     /**
      * Save a tournamentStage.
@@ -156,14 +158,14 @@ public class TournamentStageService {
         TournamentStage existingStage = currentTournamentStages
             .stream()
             .filter(s ->
-                s.getPhase() == tournamentStageDTO.getPhase().getNextPhase()
+                s.getPhase() == currentTournamentStage.getPhase().getNextPhase()
                     && (s.getFirstPlayer() == null
                     || s.getSecondPlayer() == null))
             .findAny()
             .get();
 
 
-        if(existingStage.getSecondPlayer() == null){
+        if(existingStage.getFirstPlayer() == null){
             existingStage.setFirstPlayer(currentTournamentStage.getWinner());
         } else {
             existingStage.setSecondPlayer(currentTournamentStage.getWinner());
@@ -185,9 +187,16 @@ public class TournamentStageService {
         return currentTournamentStages
             .stream()
             .anyMatch(s ->
-                s.getPhase() == tournamentStageDTO.getPhase().getNextPhase()
+                s.getPhase() == currentTournamentStage.getPhase().getNextPhase()
                     && (s.getFirstPlayer() == null
                     || s.getSecondPlayer() == null));
+    }
+
+    public List<TournamentStageDTO> getForTournament(Long id){
+        List<TournamentStage> tournamentStages = new ArrayList<>();
+        tournamentStages.addAll(tournamentRepository.findOne(id).getStages());
+        return tournamentStageMapper.tournamentStagesToTournamentStageDTOs(tournamentStages);
+
     }
 
 }

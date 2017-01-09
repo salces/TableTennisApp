@@ -2,6 +2,7 @@ package pl.edu.wat.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import org.springframework.transaction.annotation.Transactional;
+import pl.edu.wat.domain.TournamentStage;
 import pl.edu.wat.service.TournamentStageService;
 import pl.edu.wat.web.rest.util.HeaderUtil;
 import pl.edu.wat.web.rest.util.PaginationUtil;
@@ -22,6 +23,7 @@ import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -112,9 +114,9 @@ public class TournamentStageResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<TournamentStageDTO> getTournamentStage(@PathVariable Long id) {
+    public ResponseEntity<List<TournamentStageDTO>> getStagesForTournament(@PathVariable Long id) {
         log.debug("REST request to get TournamentStage : {}", id);
-        TournamentStageDTO tournamentStageDTO = tournamentStageService.findOne(id);
+        List<TournamentStageDTO> tournamentStageDTO = tournamentStageService.getForTournament(id);
         return Optional.ofNullable(tournamentStageDTO)
             .map(result -> new ResponseEntity<>(
                 result,

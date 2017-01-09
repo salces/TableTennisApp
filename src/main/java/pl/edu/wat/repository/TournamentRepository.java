@@ -1,10 +1,8 @@
 package pl.edu.wat.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import pl.edu.wat.domain.Tournament;
 
-import org.springframework.data.jpa.repository.*;
-
-import java.util.List;
 
 /**
  * Spring Data JPA repository for the Tournament entity.

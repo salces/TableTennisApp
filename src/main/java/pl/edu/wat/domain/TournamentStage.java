@@ -43,8 +43,8 @@ public class TournamentStage implements Serializable {
     @ManyToOne
     private TournamentStage nextStage;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID")
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id")
     private Tournament tournament;
 
     @OneToOne

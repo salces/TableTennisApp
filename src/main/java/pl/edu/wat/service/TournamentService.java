@@ -122,6 +122,7 @@ public class TournamentService {
             TournamentStage stage = new TournamentStage(phase);
             stage.setFirstPlayer(players.get(i));
             stage.setSecondPlayer(players.get(i + phase));
+            stage.setTournament(tournament);
             TournamentStage savedStage = tournamentStageRepository.save(stage);
             tournament.addStage(savedStage);
         }
