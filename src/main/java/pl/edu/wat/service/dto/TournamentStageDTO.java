@@ -45,6 +45,7 @@ public class TournamentStageDTO implements Serializable {
 
     private long currentStageId;
 
+
     public Long getId() {
         return id;
     }

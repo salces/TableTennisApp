@@ -41,13 +41,21 @@
 
                 vm.myDiagram.nodeTemplate =
                     $(go.Node, "Vertical", {background: "#44CCFF"},
-                        $(go.TextBlock, "Default Text",
-                            {margin: 6, stroke: "white", font: "bold 16px sans-serif"},
-                            new go.Binding("text", "firstPlayer")),
+                        $(go.Panel, "Table",
+                            $(go.TextBlock, "Default Text",
+                                {row: 0, column: 0, margin: 6, stroke: "white", font: "bold 16px sans-serif"},
+                                new go.Binding("text", "firstPlayer")),
+                            $(go.TextBlock, "Default Text",
+                                {row: 0, column: 1, margin: 6, stroke: "white", font: "bold 16px sans-serif"},
+                                new go.Binding("text", "firstPlayerScore"))),
                         $(go.Shape, {figure: "LineH", fill: "lightgreen"}),
-                        $(go.TextBlock, "Default Text",
-                            {margin: 6, stroke: "white", font: "bold 16px sans-serif"},
-                            new go.Binding("text", "secondPlayer")),
+                        $(go.Panel, "Table",
+                            $(go.TextBlock, "Default Text",
+                                {row: 0, column: 0, margin: 6, stroke: "white", font: "bold 16px sans-serif"},
+                                new go.Binding("text", "secondPlayer")),
+                            $(go.TextBlock, "Default Text",
+                                {row: 0, column: 1, margin: 6, stroke: "white", font: "bold 16px sans-serif"},
+                                new go.Binding("text", "secondPlayerScore"))),
                         {
                             doubleClick: addMatchResult
                         }
@@ -69,10 +77,18 @@
             }
 
             function transformStage(stage) {
+                var firstPlayer = stage.firstPlayerName + ' ' + stage.firstPlayerSurname;
+                var secondPlayer = stage.secondPlayerName + ' ' + stage.secondPlayerSurname;
+                if(stage.firstPlayerName == null) firstPlayer = '';
+                if(stage.firstPlayerSurname == null) firstPlayer = '';
+                if(stage.secondPlayerName == null) secondPlayer = '';
+                if(stage.secondPlayerSurname == null) secondPlayer = '';
                 var newStage = {
                     key: stage.id,
-                    firstPlayer: stage.firstPlayerName + ' ' + stage.firstPlayerSurname,
-                    secondPlayer: stage.secondPlayerName + ' ' + stage.secondPlayerSurname,
+                    firstPlayer: firstPlayer,
+                    secondPlayer: secondPlayer,
+                    firstPlayerScore: stage.firstPlayerScore,
+                    secondPlayerScore: stage.secondPlayerScore
                 };
 
                 if (stage.nextStageId != null) {
@@ -94,38 +110,52 @@
                 });
             }
 
-            function addStage(prevStage, newStage) {
+            function addStage(prevStage, result, newStage) {
                 vm.myDiagram.startTransaction('add stage');
                 var key;
-
+                console.log("exists: " + doesExistEmpty())
+                console.log("completed: " + isComplete(newStage))
                 if (!doesExistEmpty() && !isComplete(newStage)) {
+                    console.log('doesnt exists and isnt complete')
                     vm.stages.push(newStage);
                     var transformedStage = transformStage(newStage);
                     vm.myDiagram.model.addNodeData(transformedStage);
                     key = transformedStage.key;
                 } else if (isComplete(newStage) && !doesExistEmpty()) {
+                    console.log('doesnt exists and is complete')
+
                 }
                 else {
+                    console.log('everything')
                     var existingStage = getExisting();
-                    vm.myDiagram.model.setDataProperty(existingStage, 'secondPlayer', newStage.firstPlayerName + ' ' + newStage.secondPlayerName);
+                    var transformedStage = transformStage(newStage);
+                    console.log('transformed stage');
+                    console.log(transformedStage);
+                    vm.myDiagram.model.setDataProperty(existingStage, 'secondPlayer', transformedStage.secondPlayer);
                     key = existingStage.key;
                 }
                 vm.myDiagram.model.setDataProperty(prevStage, 'parent', key);
+                vm.myDiagram.model.setDataProperty(prevStage, 'firstPlayerScore', result.firstPlayerScore);
+                vm.myDiagram.model.setDataProperty(prevStage, 'secondPlayerScore', result.secondPlayerScore);
 
                 vm.myDiagram.commitTransaction('add stage');
             }
 
             function doesExistEmpty() {
                 for (var i = 0; i < vm.nodeDataArray.length; i++) {
-                    if (vm.nodeDataArray[i].secondPlayer === 'null null') {
+                    if (!vm.nodeDataArray[i].secondPlayer) {
+                        console.log("There should be nothing: " + vm.nodeDataArray[i].secondPlayer)
                         return true;
                     }
                 }
+                return false;
             }
 
             function getExisting() {
+                console.log('should return existing');
                 for (var i = 0; i < vm.nodeDataArray.length; i++) {
-                    if (vm.nodeDataArray[i].secondPlayer === 'null null') {
+                    if (!vm.nodeDataArray[i].secondPlayer) {
+                        console.log(vm.nodeDataArray[i])
                         return vm.nodeDataArray[i];
                     }
                 }
@@ -133,10 +163,10 @@
 
             function isComplete(stage) {
                 if (stage.phase === 'FINAL'
-                    && stage.firstPlayerName != null
-                    && stage.firstPlayerSurname != null
-                    && stage.secondPlayerName != null
-                    && stage.secondPlayerSurname != null) {
+                    && stage.firstPlayerName
+                    && stage.firstPlayerSurname
+                    && stage.secondPlayerName
+                    && stage.secondPlayerSurname) {
                     return true;
                 } else {
                     return false;

@@ -18,6 +18,8 @@ public interface TournamentStageMapper {
     @Mapping(source = "nextStage.id", target = "nextStageId")
     @Mapping(source = "tournament.id", target = "tournamentId")
     @Mapping(source = "tournamentMatch.id", target = "tournamentMatchId")
+    @Mapping(source = "tournamentMatch.firstPlayerScore", target = "firstPlayerScore")
+    @Mapping(source = "tournamentMatch.secondPlayerScore", target = "secondPlayerScore")
     TournamentStageDTO tournamentStageToTournamentStageDTO(TournamentStage tournamentStage);
 
     List<TournamentStageDTO> tournamentStagesToTournamentStageDTOs(List<TournamentStage> tournamentStages);

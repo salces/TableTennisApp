@@ -20,15 +20,9 @@
         }
 
         function saveResult() {
-            var parentIndex = LadderDrawer.nodeDataArray.indexOf(vm.stage);
-            console.log(vm.stage);
             vm.result.currentStageId = vm.stage.key;
             TournamentStage.nextStage(vm.result).$promise.then(function success(response) {
-                console.log('Logging success response')
-                console.log(response)
-                // if(shouldSave(response)){
-                    vm.TournamentLadderService.addStage(vm.stage, response);
-                // }
+                    vm.TournamentLadderService.addStage(vm.stage, vm.result, response);
             }, function error(response) {
                 console.log('Logging error response')
                 console.log(response)

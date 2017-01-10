@@ -16,6 +16,8 @@
         $uibModalInstance.opened.then(function () {
             TournamentStage.get({id: vm.tournament.id}).$promise.then(success, error);
             function success(data, headers) {
+                // console.log("from server")
+                // console.log(data)
                 TournamentLadderService.create(data);
                 TournamentLadderService.draw();
             }
