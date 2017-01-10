@@ -24,8 +24,6 @@
             TournamentStage.nextStage(vm.result).$promise.then(function success(response) {
                     vm.TournamentLadderService.addStage(vm.stage, vm.result, response);
             }, function error(response) {
-                console.log('Logging error response')
-                console.log(response)
             });
             $uibModalInstance.dismiss();
         }

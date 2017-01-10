@@ -28,11 +28,11 @@ public class TournamentMatch implements Serializable {
 
     @NotNull
     @Column(name = "first_player_score", nullable = false)
-    private Integer firstPlayerScore;
+    private int firstPlayerScore;
 
     @NotNull
     @Column(name = "second_player_score", nullable = false)
-    private Integer secondPlayerScore;
+    private int secondPlayerScore;
 
     @OneToOne(mappedBy = "tournamentMatch")
     @JsonIgnore
@@ -46,29 +46,29 @@ public class TournamentMatch implements Serializable {
         this.id = id;
     }
 
-    public Integer getFirstPlayerScore() {
+    public int getFirstPlayerScore() {
         return firstPlayerScore;
     }
 
-    public TournamentMatch firstPlayerScore(Integer firstPlayerScore) {
+    public TournamentMatch firstPlayerScore(int firstPlayerScore) {
         this.firstPlayerScore = firstPlayerScore;
         return this;
     }
 
-    public void setFirstPlayerScore(Integer firstPlayerScore) {
+    public void setFirstPlayerScore(int firstPlayerScore) {
         this.firstPlayerScore = firstPlayerScore;
     }
 
-    public Integer getSecondPlayerScore() {
+    public int getSecondPlayerScore() {
         return secondPlayerScore;
     }
 
-    public TournamentMatch secondPlayerScore(Integer secondPlayerScore) {
+    public TournamentMatch secondPlayerScore(int secondPlayerScore) {
         this.secondPlayerScore = secondPlayerScore;
         return this;
     }
 
-    public void setSecondPlayerScore(Integer secondPlayerScore) {
+    public void setSecondPlayerScore(int secondPlayerScore) {
         this.secondPlayerScore = secondPlayerScore;
     }
 

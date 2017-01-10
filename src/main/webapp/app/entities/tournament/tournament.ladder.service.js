@@ -113,24 +113,16 @@
             function addStage(prevStage, result, newStage) {
                 vm.myDiagram.startTransaction('add stage');
                 var key;
-                console.log("exists: " + doesExistEmpty())
-                console.log("completed: " + isComplete(newStage))
                 if (!doesExistEmpty() && !isComplete(newStage)) {
-                    console.log('doesnt exists and isnt complete')
                     vm.stages.push(newStage);
                     var transformedStage = transformStage(newStage);
                     vm.myDiagram.model.addNodeData(transformedStage);
                     key = transformedStage.key;
                 } else if (isComplete(newStage) && !doesExistEmpty()) {
-                    console.log('doesnt exists and is complete')
-
                 }
                 else {
-                    console.log('everything')
                     var existingStage = getExisting();
                     var transformedStage = transformStage(newStage);
-                    console.log('transformed stage');
-                    console.log(transformedStage);
                     vm.myDiagram.model.setDataProperty(existingStage, 'secondPlayer', transformedStage.secondPlayer);
                     key = existingStage.key;
                 }
@@ -144,7 +136,6 @@
             function doesExistEmpty() {
                 for (var i = 0; i < vm.nodeDataArray.length; i++) {
                     if (!vm.nodeDataArray[i].secondPlayer) {
-                        console.log("There should be nothing: " + vm.nodeDataArray[i].secondPlayer)
                         return true;
                     }
                 }
@@ -152,10 +143,8 @@
             }
 
             function getExisting() {
-                console.log('should return existing');
                 for (var i = 0; i < vm.nodeDataArray.length; i++) {
                     if (!vm.nodeDataArray[i].secondPlayer) {
-                        console.log(vm.nodeDataArray[i])
                         return vm.nodeDataArray[i];
                     }
                 }

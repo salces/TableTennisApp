@@ -117,7 +117,7 @@ public class TournamentMatchResourceIntTest {
     public void checkFirstPlayerScoreIsRequired() throws Exception {
         int databaseSizeBeforeTest = tournamentMatchRepository.findAll().size();
         // set the field null
-        tournamentMatch.setFirstPlayerScore(null);
+//        tournamentMatch.setFirstPlayerScore(null);
 
         // Create the TournamentMatch, which fails.
 
@@ -135,7 +135,7 @@ public class TournamentMatchResourceIntTest {
     public void checkSecondPlayerScoreIsRequired() throws Exception {
         int databaseSizeBeforeTest = tournamentMatchRepository.findAll().size();
         // set the field null
-        tournamentMatch.setSecondPlayerScore(null);
+//        tournamentMatch.setSecondPlayerScore(null);
 
         // Create the TournamentMatch, which fails.
 
