@@ -2,6 +2,7 @@ package pl.edu.wat.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import pl.edu.wat.domain.League;
+import pl.edu.wat.domain.TableElement;
 import pl.edu.wat.service.LeagueService;
 import pl.edu.wat.service.dto.LeagueDTO;
 import pl.edu.wat.service.mapper.LeagueMapper;
@@ -139,6 +140,12 @@ public class LeagueResource {
         log.debug("REST request to delete League : {}", id);
         leagueService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("league", id.toString())).build();
+    }
+
+    @RequestMapping(value = "/leagues/table",
+        method = RequestMethod.POST)
+    public List<TableElement> getTable(@RequestBody Long id){
+        return leagueService.getTable(id);
     }
 
 }

@@ -20,7 +20,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'getTable': { method: 'POST', isArray: true, params: {id: 'table'}}
         });
     }
 })();

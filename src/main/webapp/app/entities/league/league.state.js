@@ -74,6 +74,34 @@
                 }]
             }
         })
+            .state('league-table', {
+                parent: 'entity',
+                url: '/league/{id}/table',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Tabela ligi'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/league/league-table/league-table.html',
+                        controller: 'LeagueTableController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    entity: ['$stateParams', 'League', function($stateParams, League) {
+                        return League.get({id : $stateParams.id}).$promise;
+                    }],
+                    previousState: ["$state", function ($state) {
+                        var currentStateData = {
+                            name: $state.current.name || 'league',
+                            params: $state.params,
+                            url: $state.href($state.current.name, $state.params)
+                        };
+                        return currentStateData;
+                    }]
+                }
+            })
         .state('league-detail.edit', {
             parent: 'league-detail',
             url: '/detail/edit',

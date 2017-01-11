@@ -6,17 +6,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.edu.wat.domain.Club;
-import pl.edu.wat.domain.League;
-import pl.edu.wat.domain.Player;
-import pl.edu.wat.domain.Round;
+import pl.edu.wat.domain.*;
 import pl.edu.wat.repository.ClubRepository;
 import pl.edu.wat.repository.LeagueRepository;
 import pl.edu.wat.repository.RoundRepository;
 import pl.edu.wat.service.dto.LeagueDTO;
 
 import javax.inject.Inject;
+import javax.persistence.Table;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -134,7 +133,7 @@ public class LeagueService {
         return set;
     }
 
-    public League createLeague2(LeagueDTO leagueDTO){
+    public League createLeague2(LeagueDTO leagueDTO) {
         League league = new League();
         league.setCompetitors(fromListToSet(leagueDTO.getCompetitors()));
         league.setName(leagueDTO.getName());
@@ -143,8 +142,8 @@ public class LeagueService {
         List<Club> competitors = leagueDTO.getCompetitors();
         List<Round> rounds = new ArrayList<>();
 
-        for(int i = 0; i < competitors.size() - 1; i++){
-            for (int j = 0; j < competitors.size()/2; j++){
+        for (int i = 0; i < competitors.size() - 1; i++) {
+            for (int j = 0; j < competitors.size() / 2; j++) {
                 Round r = Round.builder()
                     .firstTeam(competitors.get(j))
                     .secondTeam(competitors.get(competitors.size() - j - 1))
@@ -164,11 +163,45 @@ public class LeagueService {
         return league;
     }
 
-    private List<Club> roundRobin(List<Club> competitors){
+    private List<Club> roundRobin(List<Club> competitors) {
         Club c = competitors.get(competitors.size() - 1);
         competitors.remove(competitors.size() - 1);
-        competitors.add(2,c);
+        competitors.add(2, c);
         return competitors;
     }
 
+    @Transactional
+    public List<TableElement> getTable(Long id) {
+        List<TableElement> tableElements = new ArrayList<>();
+
+        League league = leagueRepository.findOne(id);
+        league
+            .getCompetitors()
+            .forEach(c -> tableElements.add(getTableElement(c,league.getRounds())));
+        return tableElements;
+    }
+
+    private TableElement getTableElement(Club club, Set<Round> rounds) {
+        List<Round> leagueRounds = fromSetToList(rounds);
+
+        List<Round> firstTeamRounds = leagueRounds
+            .stream()
+            .filter(r -> r.getFirstTeam().getId() == club.getId())
+            .collect(Collectors.toList());
+
+        List<Round> secondTeamRounds = leagueRounds
+            .stream()
+            .filter(r -> r.getSecondTeam().getId() == club.getId())
+            .collect(Collectors.toList());
+
+        leagueRounds.addAll(getForFirstTeam(firstTeamRounds));
+
+        return null;
+    }
+
+    private List<Round> fromSetToList(Set<Round> set) {
+        List<Round> list = new ArrayList<>();
+        list.addAll(set);
+        return list;
+    }
 }
