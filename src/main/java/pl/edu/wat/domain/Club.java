@@ -1,6 +1,9 @@
 package pl.edu.wat.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -9,11 +12,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
-/**
- * A Club.
- */
 @Entity
 @Table(name = "club")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Club implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,6 +60,10 @@ public class Club implements Serializable {
 
     @ManyToOne
     private Image image;
+
+    @ManyToMany(mappedBy = "competitors")
+    @JsonIgnore
+    private Set<League> leagues = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -180,6 +187,31 @@ public class Club implements Serializable {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public Set<League> getLeagues() {
+        return leagues;
+    }
+
+    public Club leagues(Set<League> leagues) {
+        this.leagues = leagues;
+        return this;
+    }
+
+    public Club addLeagues(League league) {
+        leagues.add(league);
+        league.getCompetitors().add(this);
+        return this;
+    }
+
+    public Club removeLeagues(League league) {
+        leagues.remove(league);
+        league.getCompetitors().remove(this);
+        return this;
+    }
+
+    public void setLeagues(Set<League> leagues) {
+        this.leagues = leagues;
     }
 
     @Override

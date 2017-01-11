@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myTournamentLabel">Rundy</h4>
+</div>
+<div class="modal-body">
+
+    <table class="table table-striped">
+        <th>Gospodarz</th>
+        <th>Gosc</th>
+        <th>Wynik</th>
+        <th>Akcja</th>
+        <tr ng-repeat="round in vm.rounds">
+               <td>{{round.firstTeam.prefix+ ' ' + round.firstTeam.location + ' ' + round.firstTeam.estabilished}}</td>
+               <td>{{round.secondTeam.prefix+ ' ' + round.secondTeam.location + ' ' + round.secondTeam.estabilished}}</td>
+               <td>Jakis wynik</td>
+                <td><input type="button" ui-sref="league-rounds.edit" value="Edycja" class="btn btn-success"></td>
+        </tr>
+    </table>
+
+</div>

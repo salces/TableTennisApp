@@ -3,19 +3,17 @@
 
     angular
         .module('tableTennisApp')
-        .controller('ClubDialogController', ClubDialogController);
+        .controller('RoundDialogController', RoundDialogController);
 
-    ClubDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Club', 'User', 'Player', 'Image', 'League'];
+    RoundDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Round', 'Club', 'League'];
 
-    function ClubDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Club, User, Player, Image, League) {
+    function RoundDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Round, Club, League) {
         var vm = this;
 
-        vm.club = entity;
+        vm.round = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.users = User.query();
-        vm.players = Player.query();
-        vm.images = Image.query();
+        vm.clubs = Club.query();
         vm.leagues = League.query();
 
         $timeout(function (){
@@ -28,15 +26,15 @@
 
         function save () {
             vm.isSaving = true;
-            if (vm.club.id !== null) {
-                Club.update(vm.club, onSaveSuccess, onSaveError);
+            if (vm.round.id !== null) {
+                Round.update(vm.round, onSaveSuccess, onSaveError);
             } else {
-                Club.save(vm.club, onSaveSuccess, onSaveError);
+                Round.save(vm.round, onSaveSuccess, onSaveError);
             }
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('tableTennisApp:clubUpdate', result);
+            $scope.$emit('tableTennisApp:roundUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }

@@ -23,6 +23,7 @@ public interface ClubMapper {
     @Mapping(source = "managerId", target = "manager")
     @Mapping(target = "players", ignore = true)
     @Mapping(source = "imageId", target = "image")
+    @Mapping(target = "leagues", ignore = true)
     Club clubDTOToClub(ClubDTO clubDTO);
 
     List<Club> clubDTOsToClubs(List<ClubDTO> clubDTOs);

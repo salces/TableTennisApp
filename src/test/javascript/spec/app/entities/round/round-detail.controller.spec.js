@@ -2,9 +2,9 @@
 
 describe('Controller Tests', function() {
 
-    describe('Club Management Detail Controller', function() {
+    describe('Round Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockClub, MockUser, MockPlayer, MockImage, MockLeague;
+        var MockEntity, MockPreviousState, MockRound, MockClub, MockTournamentMatch, MockLeague;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -12,10 +12,9 @@ describe('Controller Tests', function() {
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
+            MockRound = jasmine.createSpy('MockRound');
             MockClub = jasmine.createSpy('MockClub');
-            MockUser = jasmine.createSpy('MockUser');
-            MockPlayer = jasmine.createSpy('MockPlayer');
-            MockImage = jasmine.createSpy('MockImage');
+            MockTournamentMatch = jasmine.createSpy('MockTournamentMatch');
             MockLeague = jasmine.createSpy('MockLeague');
             
 
@@ -24,21 +23,20 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
+                'Round': MockRound,
                 'Club': MockClub,
-                'User': MockUser,
-                'Player': MockPlayer,
-                'Image': MockImage,
+                'TournamentMatch': MockTournamentMatch,
                 'League': MockLeague
             };
             createController = function() {
-                $injector.get('$controller')("ClubDetailController", locals);
+                $injector.get('$controller')("RoundDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'tableTennisApp:clubUpdate';
+                var eventType = 'tableTennisApp:roundUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "firstTeam",
+            "otherEntityName": "club",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "secondTeam",
+            "otherEntityName": "club",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "tournamentMatch",
+            "otherEntityName": "tournamentMatch",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "league",
+            "otherEntityName": "league",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [{
+        "fieldName": "ordinal",
+        "fieldType": "Integer"
+    }, {
+        "fieldName": "ha",
+        "fieldType": "Integer"
+    }],
+    "changelogDate": "20170110054543",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "round",
+    "pagination": "pager"
+}

@@ -1,0 +1,43 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "image",
+            "otherEntityName": "image",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "competitors",
+            "otherEntityName": "club",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "leagues"
+        },
+        {
+            "relationshipName": "rounds",
+            "otherEntityName": "round",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "league"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "2",
+            "fieldValidateRulesMaxlength": "25"
+        }
+    ],
+    "changelogDate": "20170110053717",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "league",
+    "pagination": "pager"
+}

@@ -19,6 +19,13 @@
             "otherEntityName": "image",
             "relationshipType": "many-to-one",
             "otherEntityField": "alias"
+        },
+        {
+            "relationshipName": "leagues",
+            "otherEntityName": "league",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "competitors"
         }
     ],
     "fields": [

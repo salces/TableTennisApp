@@ -2,9 +2,9 @@
 
 describe('Controller Tests', function() {
 
-    describe('Club Management Detail Controller', function() {
+    describe('League Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockClub, MockUser, MockPlayer, MockImage, MockLeague;
+        var MockEntity, MockPreviousState, MockLeague, MockImage, MockClub, MockRound;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -12,11 +12,10 @@ describe('Controller Tests', function() {
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
-            MockClub = jasmine.createSpy('MockClub');
-            MockUser = jasmine.createSpy('MockUser');
-            MockPlayer = jasmine.createSpy('MockPlayer');
-            MockImage = jasmine.createSpy('MockImage');
             MockLeague = jasmine.createSpy('MockLeague');
+            MockImage = jasmine.createSpy('MockImage');
+            MockClub = jasmine.createSpy('MockClub');
+            MockRound = jasmine.createSpy('MockRound');
             
 
             var locals = {
@@ -24,21 +23,20 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
-                'Club': MockClub,
-                'User': MockUser,
-                'Player': MockPlayer,
+                'League': MockLeague,
                 'Image': MockImage,
-                'League': MockLeague
+                'Club': MockClub,
+                'Round': MockRound
             };
             createController = function() {
-                $injector.get('$controller')("ClubDetailController", locals);
+                $injector.get('$controller')("LeagueDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'tableTennisApp:clubUpdate';
+                var eventType = 'tableTennisApp:leagueUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);
