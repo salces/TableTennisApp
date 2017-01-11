@@ -3,6 +3,7 @@ package pl.edu.wat.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import pl.edu.wat.domain.Round;
 import pl.edu.wat.service.RoundService;
+import pl.edu.wat.service.dto.RoundMatchDTO;
 import pl.edu.wat.web.rest.util.HeaderUtil;
 import pl.edu.wat.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -132,6 +133,17 @@ public class RoundResource {
         log.debug("REST request to delete Round : {}", id);
         roundService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("round", id.toString())).build();
+    }
+
+    @RequestMapping(value = "/rounds/match",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void addMatch(@RequestBody RoundMatchDTO roundMatchDTO) {
+        System.out.println("Id:" + roundMatchDTO.getId());
+        System.out.println("Id:" + roundMatchDTO.getFirstClubScore());
+        System.out.println("Id:" + roundMatchDTO.getSecondClubScore());
+        roundService.addMatch(roundMatchDTO);
     }
 
 }

@@ -200,7 +200,7 @@
                 });
             }]
         }).state('league-rounds.edit', {
-            parent: 'league',
+            parent: 'league-rounds',
             url: '',
             data: {
                 authorities: ['ROLE_USER'],
@@ -214,7 +214,7 @@
                     size: 'lg',
                     resolve: {
                         entity: [function () {
-                            return $stateParams.id;
+                            return {id: $stateParams.id};
                         }]
                     }
                 }).result.then(function () {

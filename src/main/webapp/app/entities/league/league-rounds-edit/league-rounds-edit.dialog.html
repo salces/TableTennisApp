@@ -4,9 +4,21 @@
     <h4 class="modal-title" id="myTournamentLabel">Rundy</h4>
 </div>
 <div class="modal-body">
-  <label>Wynik zespolu pierszego: </label>
-    <input type="number" max="3" step="1">
-    <br>
-  <label>Wynik zespolu drugiego: </label>
-    <input type="number" max="3" step="1">
+    <table>
+        <th>Druzyna</th>
+        <th>Wynik</th>
+        <tr>
+            <td>{{vm.round.firstTeam.prefix+ ' ' + vm.round.firstTeam.location + ' ' +
+                vm.round.firstTeam.estabilished}}:
+            </td>
+            <td><input type="number" ng-model="vm.result.firstClubScore" max="3" step="1"></td>
+        </tr>
+        <tr>
+            <td>{{vm.round.secondTeam.prefix+ ' ' + vm.round.secondTeam.location + ' ' +
+                vm.round.secondTeam.estabilished}}:
+            </td>
+            <td><input type="number" ng-model="vm.result.secondClubScore" max="3" step="1"></td>
+        </tr>
+    </table>
+    <input type="button" value="Zapisz wynik" ng-click="vm.edit()">
 </div>

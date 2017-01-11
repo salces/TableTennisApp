@@ -5,17 +5,31 @@
         .module('tableTennisApp')
         .controller('LeagueRoundsEditDialogController', LeagueRoundsEditDialogController);
 
-    LeagueRoundsEditDialogController.$inject = ['$uibModalInstance','entity'];
+    LeagueRoundsEditDialogController.$inject = ['$uibModalInstance','entity','Round'];
 
-    function LeagueRoundsEditDialogController($uibModalInstance,entity) {
+    function LeagueRoundsEditDialogController($uibModalInstance,entity,Round) {
         var vm = this;
-        vm.roundId = entity;
-        vm.clear = clear;
+        vm.round = entity;
+        vm.result = {
+            id: vm.round.id
+        };
 
-        console.log(entity)
+        vm.clear = clear;
+        vm.edit = edit;
 
         function clear() {
             $uibModalInstance.dismiss('cancel');
         }
+
+        function edit() {
+            console.log(vm.result);
+            Round.addMatch(vm.result).$promise.then(function success() {
+
+            }, function error() {
+
+            });
+            vm.clear();
+        }
+
     }
 })();

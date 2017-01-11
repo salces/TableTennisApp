@@ -6,15 +6,17 @@
 <div class="modal-body">
 
     <table class="table table-striped">
+        <th>L.p.</th>
         <th>Gospodarz</th>
         <th>Gosc</th>
         <th>Wynik</th>
         <th>Akcja</th>
         <tr ng-repeat="round in vm.rounds">
-               <td>{{round.firstTeam.prefix+ ' ' + round.firstTeam.location + ' ' + round.firstTeam.estabilished}}</td>
+            <td>{{$index + 1}}</td>
+            <td>{{round.firstTeam.prefix+ ' ' + round.firstTeam.location + ' ' + round.firstTeam.estabilished}}</td>
                <td>{{round.secondTeam.prefix+ ' ' + round.secondTeam.location + ' ' + round.secondTeam.estabilished}}</td>
-               <td>Jakis wynik</td>
-                <td><input type="button" ui-sref="league-rounds.edit" value="Edycja" class="btn btn-success"></td>
+               <td>{{round.tournamentMatch.firstPlayerScore}} : {{round.tournamentMatch.secondPlayerScore}}</td>
+                <td><input type="button" ng-click="vm.edit(round)" value="Edycja" class="btn btn-success"></td>
         </tr>
     </table>
 

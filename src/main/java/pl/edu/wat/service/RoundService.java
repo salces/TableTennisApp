@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import pl.edu.wat.domain.Round;
+import pl.edu.wat.domain.Tournament;
+import pl.edu.wat.domain.TournamentMatch;
 import pl.edu.wat.repository.RoundRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import pl.edu.wat.repository.TournamentMatchRepository;
+import pl.edu.wat.service.dto.RoundMatchDTO;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -30,6 +34,8 @@ public class RoundService {
     @Inject
     private RoundRepository roundRepository;
 
+    @Inject
+    private TournamentMatchRepository tournamentMatchRepository;
     /**
      * Save a round.
      *
@@ -80,5 +86,16 @@ public class RoundService {
 
     public List<Round> findForLeague(Long id) {
         return roundRepository.findByLeagueIdOrderByOrdinalAscHaAsc(id);
+    }
+
+    public void addMatch(RoundMatchDTO roundMatchDTO) {
+        Round round = roundRepository.findOne(new Long(roundMatchDTO.getId()));
+        TournamentMatch match = TournamentMatch.builder()
+            .firstPlayerScore(roundMatchDTO.getFirstClubScore())
+            .secondPlayerScore(roundMatchDTO.getSecondClubScore())
+            .build();
+        match = tournamentMatchRepository.save(match);
+        round.setTournamentMatch(match);
+        roundRepository.save(round);
     }
 }

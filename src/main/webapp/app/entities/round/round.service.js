@@ -21,7 +21,8 @@
                 }
             },
             'update': { method:'PUT' },
-            'getForTournament': {method : 'GET', isArray:true}
+            'getForTournament': {method : 'GET', isArray:true},
+            'addMatch' : {method: 'POST', params: {id : 'match'}}
         });
     }
 })();
