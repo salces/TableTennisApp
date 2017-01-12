@@ -232,7 +232,7 @@ public class LeagueService {
         TableElement tableElement = TableElement.builder()
             .club(tableElementForFirstTeam.getClub())
             .points(tableElementForFirstTeam.getPoints() + tableElementForSecondTeam.getPoints())
-            .wins(tableElementForFirstTeam.getWins() + tableElementForSecondTeam.getPoints())
+            .wins(tableElementForFirstTeam.getWins() + tableElementForSecondTeam.getWins())
             .defeats(tableElementForFirstTeam.getDefeats() + tableElementForSecondTeam.getDefeats())
             .matchesPlayed(tableElementForFirstTeam.getMatchesPlayed() + tableElementForSecondTeam.getMatchesPlayed())
             .smallWins(tableElementForFirstTeam.getSmallWins() + tableElementForSecondTeam.getSmallWins())

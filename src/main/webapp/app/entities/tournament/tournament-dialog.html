@@ -3,7 +3,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myTournamentLabel">Create or edit a Tournament</h4>
+        <h4 class="modal-title" id="myTournamentLabel">Stwórz lub edytuj turniej</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
@@ -13,31 +13,31 @@
                    ng-model="vm.tournament.id" readonly/>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_name">Name</label>
+            <label class="control-label" for="field_name">Nazwa</label>
             <input type="text" class="form-control" name="name" id="field_name"
                    ng-model="vm.tournament.name"
                    required ng-minlength="2" ng-maxlength="25"/>
             <div ng-show="editForm.name.$invalid">
                 <p class="help-block"
                    ng-show="editForm.name.$error.required">
-                    This field is required.
+                    To pole jest wymagane.
                 </p>
                 <p class="help-block"
                    ng-show="editForm.name.$error.minlength" translate-value-min="2">
-                    This field is required to be at least 2 characters.
+                    To pole wymaga minimum 2 znaków.
                 </p>
                 <p class="help-block"
                    ng-show="editForm.name.$error.maxlength">
-                    This field cannot be longer than 25 characters.
+                    To pole może zawierać maksymalnie 25 znaków.
                 </p>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="field_phase">Phase</label>
+            <label class="control-label" for="field_phase">Faza początkowa</label>
             <select class="form-control" name="phase" ng-model="vm.tournament.phase" id="field_phase"
                     ng-change="vm.changeChosenPlayersColor()" required>
-                <option value="1" selected>Final</option>
+                <option value="1" selected>Finał</option>
                 <option value="2">1/2</option>
                 <option value="4">1/4</option>
                 <option value="8">1/8</option>
@@ -48,11 +48,11 @@
             <div ng-show="editForm.phase.$invalid">
                 <p class="help-block"
                    ng-show="editForm.phase.$error.required">
-                    This field is required.
+                    To pole jest wymagane.
                 </p>
             </div>
 
-            <label for="field_image">Image</label>
+            <label for="field_image">Obraz</label>
             <select class="form-control" id="field_image" name="image" ng-model="vm.tournament.imageId"
                     ng-options="image.id as image.id for image in vm.images">
                 <option value=""></option>
@@ -61,13 +61,13 @@
 
         <div class="row">
             <div class="col-md-6">
-                <label for="availablePlayersGridId">Available players</label>
+                <label for="availablePlayersGridId">Dostępni zawodnicy</label>
                 <div class="form-group">
                     <div id="availablePlayersGridId" class="grid" ui-grid="availablePlayersGrid" ui-grid-pagination></div>
                 </div>
             </div>
             <div class="col-md-6">
-                <label for="chosenPlayersGridId">Chosen players: <span style="{{vm.chosenPlayersColor}}">{{vm.chosenPlayers.length}}</span>/{{vm.tournament.phase * 2}}</label>
+                <label for="chosenPlayersGridId">Wybrani zawodnicy: <span style="{{vm.chosenPlayersColor}}">{{vm.chosenPlayers.length}}</span>/{{vm.tournament.phase * 2}}</label>
                 <div class="form-group">
                     <div id="chosenPlayersGridId" class="grid" ui-grid="chosenPlayersGrid" ui-grid-pagination></div>
                 </div>
@@ -76,10 +76,10 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Anuluj</span>
         </button>
         <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Zapisz</span>
         </button>
     </div>
 </form>

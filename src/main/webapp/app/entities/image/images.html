@@ -1,5 +1,5 @@
 <div>
-    <h2>Images</h2>
+    <h2>Obrazy</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
@@ -7,7 +7,7 @@
                 <button class="btn btn-primary" ui-sref="image.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span >
-                        Create new Image
+                        Dodaj nowy obraz
                     </span>
                 </button>
             </div>
@@ -20,9 +20,8 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="alias"><span>Alias</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="data"><span>Data</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="ownerLogin"><span>Owner</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="data"><span>Zdjęcie</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span>Nazwa</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>

@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>Image</span> {{vm.image.id}}</h2>
+    <h2><span>Obraz</span> {{vm.image.alias}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
@@ -8,7 +8,7 @@
         <dd>
             <span>{{vm.image.alias}}</span>
         </dd>
-        <dt><span>Data</span></dt>
+        <dt><span>Obraz</span></dt>
         <dd>
             <div ng-if="vm.image.data">
                 <a ng-click="vm.openFile(vm.image.dataContentType, vm.image.data)">
@@ -17,24 +17,20 @@
                 {{vm.image.dataContentType}}, {{vm.byteSize(vm.image.data)}}
             </div>
         </dd>
-        <dt><span>Name</span></dt>
+        <dt><span>Nazwa</span></dt>
         <dd>
             <span>{{vm.image.name}}</span>
-        </dd>
-        <dt><span>Owner</span></dt>
-        <dd>
-            {{vm.image.ownerLogin}}
         </dd>
     </dl>
 
     <button type="submit"
             ui-sref="{{ vm.previousState }}"
             class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Cofnij</span>
     </button>
 
     <button type="button" ui-sref="image-detail.edit({id:vm.image.id})" class="btn btn-primary">
         <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-xs hidden-sm"> Edit</span>
+        <span class="hidden-xs hidden-sm"> Edycja</span>
     </button>
 </div>

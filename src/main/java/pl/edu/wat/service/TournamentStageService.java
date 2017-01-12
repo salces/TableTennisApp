@@ -223,6 +223,7 @@ public class TournamentStageService {
                     || s.getSecondPlayer() == null));
     }
 
+    @Transactional
     public List<TournamentStageDTO> getForTournament(Long id){
         List<TournamentStage> tournamentStages = new ArrayList<>();
         tournamentStages.addAll(tournamentRepository.findOne(id).getStages());

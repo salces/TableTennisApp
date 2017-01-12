@@ -1,34 +1,30 @@
 
 <div>
-    <h2><span>Player</span> {{vm.player.id}}</h2>
+    <h2><span>Zawodnik </span> {{vm.player.name + ' ' + vm.player.surname}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span>Name</span></dt>
+        <dt><span>Imie</span></dt>
         <dd>
             <span>{{vm.player.name}}</span>
         </dd>
-        <dt><span>Surname</span></dt>
+        <dt><span>Nazwisko</span></dt>
         <dd>
             <span>{{vm.player.surname}}</span>
         </dd>
-        <dt><span>Nationality</span></dt>
+        <dt><span>Narodowość</span></dt>
         <dd>
             <span>{{vm.player.nationality}}</span>
         </dd>
-        <dt><span>Height</span></dt>
+        <dt><span>Wzrost</span></dt>
         <dd>
             <span>{{vm.player.height}}</span>
         </dd>
-        <dt><span>Manager</span></dt>
-        <dd>
-            {{vm.player.managerLogin}}
-        </dd>
-        <dt><span>Club</span></dt>
+        <dt><span>Klub</span></dt>
         <dd>
             <a ui-sref="club-detail({id:vm.player.clubId})">{{vm.player.clubPrefix}}</a>
         </dd>
-        <dt><span>Image</span></dt>
+        <dt><span>Obraz</span></dt>
         <dd>
             <a ui-sref="image-detail({id:vm.player.imageId})">{{vm.player.imageAlias}}</a>
         </dd>
@@ -37,11 +33,11 @@
     <button type="submit"
             ui-sref="{{ vm.previousState }}"
             class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Cofnij</span>
     </button>
 
     <button type="button" ui-sref="player-detail.edit({id:vm.player.id})" class="btn btn-primary">
         <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-xs hidden-sm"> Edit</span>
+        <span class="hidden-xs hidden-sm"> Edytuj</span>
     </button>
 </div>

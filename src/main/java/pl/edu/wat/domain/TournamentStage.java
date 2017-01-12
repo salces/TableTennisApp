@@ -31,10 +31,10 @@ public class TournamentStage implements Serializable {
     @Column(name = "phase_code")
     private Integer phaseCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Player firstPlayer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Player secondPlayer;
 
     @ManyToOne

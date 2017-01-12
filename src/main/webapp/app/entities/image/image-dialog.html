@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myImageLabel">Create or edit a Image</h4>
+        <h4 class="modal-title" id="myImageLabel">Dodaj lub edytuj obraz</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
@@ -21,20 +21,20 @@
             <div ng-show="editForm.alias.$invalid">
                 <p class="help-block"
                     ng-show="editForm.alias.$error.required">
-                    This field is required.
+                    To pole jest wymagane.
                 </p>
                 <p class="help-block"
                     ng-show="editForm.alias.$error.minlength" translate-value-min="2">
-                    This field is required to be at least 2 characters.
+                    To pole wymaga minimum 2 znaków.
                 </p>
                 <p class="help-block"
                     ng-show="editForm.alias.$error.maxlength">
-                    This field cannot be longer than 25 characters.
+                    To pole może zawierać maksymalnie 25 znaków.
                 </p>
             </div>
         </div>
         <div class="form-group" ngf-drop ngf-change="vm.setData($file, vm.image)" ngf-pattern="'image/*'">
-            <label class="control-label" for="field_data">Data</label>
+            <label class="control-label" for="field_data">Zdjęcie</label>
             <div>
                 <img data-ng-src="{{'data:' + vm.image.dataContentType + ';base64,' + vm.image.data}}" style="max-height: 100px;" ng-if="vm.image.data"/>
                 <div ng-if="vm.image.data" class="help-block clearfix">
@@ -46,7 +46,7 @@
                 </div>
                 <button type="button" ngf-select class="btn btn-default btn-block"
                         ngf-change="vm.setData($file, vm.image)" accept="image/*">
-                    Add image
+                    Dodaj zdjęcie
                 </button>
             </div>
             <input type="hidden" class="form-control" name="data" id="field_data"
@@ -56,39 +56,33 @@
                     ng-model="vm.image.dataContentType" />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_name">Name</label>
+            <label class="control-label" for="field_name">Nazwa</label>
             <input type="text" class="form-control" name="name" id="field_name"
                     ng-model="vm.image.name"
                     required ng-minlength="2" ng-maxlength="256" />
             <div ng-show="editForm.name.$invalid">
                 <p class="help-block"
                     ng-show="editForm.name.$error.required">
-                    This field is required.
+                    To pole jest wymagane.
                 </p>
                 <p class="help-block"
                     ng-show="editForm.name.$error.minlength" translate-value-min="2">
-                    This field is required to be at least 2 characters.
+                    To pole wymaga minimum 2 znaków.
                 </p>
                 <p class="help-block"
                     ng-show="editForm.name.$error.maxlength">
-                    This field cannot be longer than 256 characters.
+                    To pole może zawierać maksymalnie 256 znaków.
+
                 </p>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="field_owner">Owner</label>
-            <select class="form-control" id="field_owner" name="owner" ng-model="vm.image.ownerId" ng-options="user.id as user.login for user in vm.users"            >
-                <option value=""></option>
-            </select>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Anuluj</span>
         </button>
         <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Zapisz</span>
         </button>
     </div>
 </form>

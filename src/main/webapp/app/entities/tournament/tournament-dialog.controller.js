@@ -32,6 +32,7 @@
         }
 
         function save() {
+            console.log(vm.chosenPlayers)
             vm.tournament.chosenPlayers = toIdArray(vm.chosenPlayers);
             if (vm.tournament.id !== null) {
                 Tournament.update(vm.tournament, onSaveSuccess, onSaveError);
@@ -44,7 +45,7 @@
                 for(var i = 0; i < players.length; i++){
                     playersId.push(players[i].id)
                 }
-                return playersId
+                return playersId;
             }
         }
 
@@ -95,11 +96,11 @@
                 data: 'vm.availablePlayers',
                 columnDefs: [
                     {name: 'Id', field: 'id'},
-                    {name: 'Name', field: 'name'},
-                    {name: 'Surname', field: 'surname'},
+                    {name: 'Imie', field: 'name'},
+                    {name: 'Nazwisko', field: 'surname'},
                     {
                         name: ' ',
-                        cellTemplate: '<input type="button" class="btn btn-success" value="Add" style="width:100%;border-radius: 0px" ' +
+                        cellTemplate: '<input type="button" class="btn btn-success" value="Dodaj" style="width:100%;border-radius: 0px" ' +
                         'ng-click="grid.appScope.vm.onAddPlayer(row.entity)" />',
                         enableColumnMenu: false,
                         enableSorting: false,
@@ -118,11 +119,11 @@
                 data: 'vm.chosenPlayers',
                 columnDefs: [
                     {name: 'Id', field: 'id'},
-                    {name: 'Name', field: 'name'},
-                    {name: 'Surname', field: 'surname'},
+                    {name: 'Imie', field: 'name'},
+                    {name: 'Nazwisko', field: 'surname'},
                     {
                         name: ' ',
-                        cellTemplate: '<input type="button" class="btn btn-danger" value="Remove" style="width:100%;border-radius: 0px" ng-click="grid.appScope.vm.onRemovePlayer(row.entity)" />',
+                        cellTemplate: '<input type="button" class="btn btn-danger" value="Usuń" style="width:100%;border-radius: 0px" ng-click="grid.appScope.vm.onRemovePlayer(row.entity)" />',
                         enableColumnMenu: false,
                         enableSorting: false,
                         enableFiltering: false

@@ -94,7 +94,7 @@
                     }],
                     previousState: ["$state", function ($state) {
                         var currentStateData = {
-                            name: $state.current.name || 'league',
+                            name: $state.current.name || 'league-detail',
                             params: $state.params,
                             url: $state.href($state.current.name, $state.params)
                         };
