@@ -1,5 +1,5 @@
 <div>
-    <h2>Application Metrics</h2>
+    <h2>Metryki aplikacji</h2>
     <p>
         <button type="button" class="btn btn-primary" ng-click="vm.refresh()"><span class="glyphicon glyphicon-refresh"></span>&nbsp;<span>Refresh</span></button>
     </p>
@@ -170,7 +170,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <h3 ng-show="vm.metrics.gauges['HikariPool-1.pool.TotalConnections'].value > 0">DataSource statistics (time in millisecond)</h3>
     <div class="table-responsive" ng-show="vm.metrics.gauges['HikariPool-1.pool.TotalConnections'].value > 0">
         <table class="table table-striped">

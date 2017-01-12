@@ -3,23 +3,23 @@
     <dl class="dl-horizontal">
         <dt><span>Login</span></dt>
         <dd><span>{{vm.user.login}}</span></dd>
-        <dt><span>First Name</span></dt>
+        <dt><span>Imie</span></dt>
         <dd>{{vm.user.firstName}}</dd>
-        <dt><span>Last Name</span></dt>
+        <dt><span>Nazwisko</span></dt>
         <dd>{{vm.user.lastName}}</dd>
         <dt><span>Email</span></dt>
         <dd>{{vm.user.email}}</dd>
-        <dt><span>Activated</span></dt>
+        <dt><span>Aktywowane</span></dt>
         <dd>{{vm.user.activated}}</dd>
-        <dt><span>Created By</span></dt>
+        <dt><span>Stworzone przez</span></dt>
         <dd>{{vm.user.createdBy}}</dd>
-        <dt><span>Created Date</span></dt>
+        <dt><span>Data założenia</span></dt>
         <dd>{{vm.user.createdDate | date:'dd/MM/yy HH:mm' }}</dd>
-        <dt><span>Last Modified By</span></dt>
+        <dt><span>Ostatnio modyfikowane przez</span></dt>
         <dd>{{vm.user.lastModifiedBy}}</dd>
-        <dt><span>Last Modified Date</span></dt>
+        <dt><span>Data ostatniej modyfikacji</span></dt>
         <dd>{{vm.user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</dd>
-        <dt><span>Profiles</span></dt>
+        <dt><span>Profile</span></dt>
         <dd>
             <ul class="list-unstyled">
                 <li ng-repeat="authority in vm.user.authorities"><span>{{authority}}</span></li>
@@ -29,6 +29,6 @@
     <button type="submit"
             ui-sref="user-management"
             class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Cofnij</span>
     </button>
 </div>
