@@ -75,7 +75,7 @@
             }
         })
             .state('league-table', {
-                parent: 'entity',
+                parent: 'league-detail',
                 url: '/league/{id}/table',
                 data: {
                     authorities: ['ROLE_USER'],

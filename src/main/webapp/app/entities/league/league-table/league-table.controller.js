@@ -11,7 +11,7 @@
         var vm = this;
 
         vm.league = entity;
-        vm.leagueTable = League.getTable({id: vm.league.id});
+        vm.leagueTable = League.getTable(vm.league.id);
         console.log(vm.leagueTable);
 
     }

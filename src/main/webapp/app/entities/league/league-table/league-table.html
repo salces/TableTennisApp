@@ -1,1 +1,20 @@
-hello table
+<table class="table table-striped table-bordered">
+    <th>L.p.</th>
+    <th>Druzyna</th>
+    <th>Punkty</th>
+    <th>Rozegrane</th>
+    <th>Wygrane</th>
+    <th>Przegrane</th>
+    <th>Male zwyciestwa</th>
+    <th>Male przegrane</th>
+    <tr ng-repeat="te in vm.leagueTable">
+        <td>{{$index+1}}</td>
+        <td>{{te.club.prefix + ' ' + te.club.location + ' ' + te.club.estabilished}}</td>
+        <td>{{te.points}}</td>
+        <td>{{te.matchesPlayed}}</td>
+        <td>{{te.wins}}</td>
+        <td>{{te.defeats}}</td>
+        <td>{{te.smallWins}}</td>
+        <td>{{te.smallDefeats}}</td>
+    </tr>
+</table>

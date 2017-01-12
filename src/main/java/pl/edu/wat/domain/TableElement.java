@@ -13,7 +13,7 @@ public class TableElement {
     private int points;
     private int wins;
     private int defeats;
-    private int littleWins;
-    private int littleDefeats;
+    private int smallWins;
+    private int smallDefeats;
 
 }

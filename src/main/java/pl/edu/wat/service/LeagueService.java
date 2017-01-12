@@ -177,9 +177,39 @@ public class LeagueService {
         League league = leagueRepository.findOne(id);
         league
             .getCompetitors()
-            .forEach(c -> tableElements.add(getTableElement(c,league.getRounds())));
-        return tableElements;
+            .forEach(c -> tableElements.add(getTableElement(c, league.getRounds())));
+        return sort(tableElements);
     }
+
+    private List<TableElement> sort(List<TableElement> tableElements) {
+        return tableElements
+            .stream()
+            .sorted((te1,te2) -> compare(te1,te2))
+            .collect(Collectors.toList());
+    }
+
+    private int compare(TableElement te1, TableElement te2) {
+        if(te1.getPoints() > te2.getPoints()){
+            return -1;
+        } else if(te1.getPoints() < te2.getPoints()){
+            return 1;
+        } else {
+            if(te1.getSmallWins() > te2.getSmallWins()){
+                return -1;
+            } else if(te1.getSmallWins() < te2.getSmallWins()){
+                return 1;
+            } else {
+                if(te1.getSmallDefeats() < te2.getSmallDefeats()){
+                    return -1;
+                } else if(te1.getSmallDefeats() > te2.getSmallDefeats()){
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        }
+    }
+
 
     private TableElement getTableElement(Club club, Set<Round> rounds) {
         List<Round> leagueRounds = fromSetToList(rounds);
@@ -194,9 +224,98 @@ public class LeagueService {
             .filter(r -> r.getSecondTeam().getId() == club.getId())
             .collect(Collectors.toList());
 
-        leagueRounds.addAll(getForFirstTeam(firstTeamRounds));
+        return sumUp(getTableElementForFirstTeam(club, firstTeamRounds), getTableElementForSecondTeam(club, secondTeamRounds));
+    }
 
-        return null;
+
+    private TableElement sumUp(TableElement tableElementForFirstTeam, TableElement tableElementForSecondTeam) {
+        TableElement tableElement = TableElement.builder()
+            .club(tableElementForFirstTeam.getClub())
+            .points(tableElementForFirstTeam.getPoints() + tableElementForSecondTeam.getPoints())
+            .wins(tableElementForFirstTeam.getWins() + tableElementForSecondTeam.getPoints())
+            .defeats(tableElementForFirstTeam.getDefeats() + tableElementForSecondTeam.getDefeats())
+            .matchesPlayed(tableElementForFirstTeam.getMatchesPlayed() + tableElementForSecondTeam.getMatchesPlayed())
+            .smallWins(tableElementForFirstTeam.getSmallWins() + tableElementForSecondTeam.getSmallWins())
+            .smallDefeats(tableElementForFirstTeam.getSmallDefeats() + tableElementForSecondTeam.getSmallDefeats())
+            .build();
+        return tableElement;
+    }
+
+    private TableElement getTableElementForFirstTeam(Club club, List<Round> firstTeamRounds) {
+        TableElement tableElement = new TableElement();
+        tableElement.setClub(club);
+
+        final int pointsForWin = 3;
+        final int pointsForDraw = 1;
+
+        int matchesPlayed = 0;
+        int points = 0;
+        int defeats = 0;
+        int wins = 0;
+        int smallWins = 0;
+        int smallDefeats = 0;
+
+        for (Round r : firstTeamRounds) {
+            if (r.getTournamentMatch() != null) {
+                if (r.getTournamentMatch().getFirstPlayerScore() > r.getTournamentMatch().getSecondPlayerScore()) {
+                    wins++;
+                    points += pointsForWin;
+                } else {
+                    defeats++;
+                }
+                smallWins += r.getTournamentMatch().getFirstPlayerScore();
+                smallDefeats += r.getTournamentMatch().getSecondPlayerScore();
+                matchesPlayed++;
+            }
+        }
+
+        tableElement.setMatchesPlayed(matchesPlayed);
+        tableElement.setPoints(points);
+        tableElement.setWins(wins);
+        tableElement.setDefeats(defeats);
+        tableElement.setSmallDefeats(smallDefeats);
+        tableElement.setSmallWins(smallWins);
+
+        return tableElement;
+    }
+
+    private TableElement getTableElementForSecondTeam(Club club, List<Round> secondTeamRounds) {
+        TableElement tableElement = new TableElement();
+        tableElement.setClub(club);
+
+        final int pointsForWin = 3;
+
+        int matchesPlayed = 0;
+        int points = 0;
+        int defeats = 0;
+        int wins = 0;
+        int smallWins = 0;
+        int smallDefeats = 0;
+
+        for (Round r : secondTeamRounds) {
+            if (r.getTournamentMatch() != null) {
+
+                if (r.getTournamentMatch().getFirstPlayerScore() < r.getTournamentMatch().getSecondPlayerScore()) {
+                    wins++;
+                    points += pointsForWin;
+                } else {
+                    defeats++;
+                }
+                smallWins += r.getTournamentMatch().getSecondPlayerScore();
+                smallDefeats += r.getTournamentMatch().getFirstPlayerScore();
+                matchesPlayed++;
+            }
+
+        }
+
+        tableElement.setMatchesPlayed(matchesPlayed);
+        tableElement.setPoints(points);
+        tableElement.setWins(wins);
+        tableElement.setDefeats(defeats);
+        tableElement.setSmallDefeats(smallDefeats);
+        tableElement.setSmallWins(smallWins);
+
+        return tableElement;
     }
 
     private List<Round> fromSetToList(Set<Round> set) {
