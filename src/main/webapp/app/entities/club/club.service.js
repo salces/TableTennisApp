@@ -20,7 +20,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'getRandom': {method: 'get', isArray: false, params: {id: 'random'}}
         });
     }
 })();

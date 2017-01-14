@@ -3,6 +3,7 @@ package pl.edu.wat.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -322,5 +323,9 @@ public class LeagueService {
         List<Round> list = new ArrayList<>();
         list.addAll(set);
         return list;
+    }
+
+    public List<Round> getLastResults() {
+        return roundRepository.findLastRounds(new PageRequest(0,5));
     }
 }

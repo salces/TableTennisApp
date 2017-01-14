@@ -1,41 +1,75 @@
-<div ng-cloak>
-    <div class="row">
-        <div class="col-md-4">
-            <span class="hipster img-responsive img-rounded"></span>
+<div class="row">
+    <div class="col-md-6">
+        <h1>
+            Ostatnie wyniki ligowe
+        </h1>
+        <table class="table table-striped table-bordered">
+            <th>Nazwa ligi</th>
+            <th>Gospodarz</th>
+            <th>Gosc</th>
+            <th>Wynik</th>
+            <tr ng-repeat="round in vm.leagueResults">
+                <td>{{round.league.name}}</td>
+                <td>{{round.firstTeam.prefix + ' ' + round.firstTeam.location + ' ' + round.firstTeam.estabilished}}
+                </td>
+                <td>{{round.secondTeam.prefix + ' ' + round.secondTeam.location + ' ' +
+                    round.secondTeam.estabilished}}
+                </td>
+                <td>{{round.tournamentMatch.firstPlayerScore + ':' + round.tournamentMatch.secondPlayerScore}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h1>
+            Ostatnie wyniki turniejowe
+        </h1>
+        <table class="table table-striped table-bordered">
+            <th>Nazwa ligi</th>
+            <th>Liczba</th>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h1>
+            Losowy zawodnik
+        </h1>
+        <div>
+            <a ng-if="vm.randomPlayer.image.data"
+               ng-click="vm.openFile(vm.randomPlayer.image.dataContentType, vm.player.image.data)">
+                <img
+                    data-ng-src="{{'data:' + vm.randomPlayer.image.dataContentType + ';base64,' + vm.randomPlayer.image.data}}"
+                    style="max-height: 30px;"/>
+            </a>
+            <label>Imie: </label>{{vm.randomPlayer.name}} <br>
+            <label>Nazwisko: </label>{{vm.randomPlayer.surname}} <br>
+            <label>Narodowość: </label> {{vm.randomPlayer.nationality}} <br>
+            <label>Wzrost: </label> {{vm.randomPlayer.height}} <br>
+            <label>Klub: </label> {{vm.randomPlayer.club ? vm.randomPlayer.club.prefix + ' ' +
+            vm.randomPlayer.club.location + ' ' + vm.randomPlayer.club.estabilished : 'Wolny zawodnik'}}
         </div>
-        <div class="col-md-8">
-            <h1>Welcome, Java Hipster!</h1>
-            <p class="lead">This is your homepage</p>
-
-            <div ng-switch="vm.isAuthenticated()">
-                <div class="alert alert-success" ng-switch-when="true">
-                    You are logged in as user "{{vm.account.login}}".
-                </div>
-
-                <div class="alert alert-warning" ng-switch-when="false">
-                    If you want to <a class="alert-link" href="" ng-click="vm.login()">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
-                </div>
-
-                <div class="alert alert-warning" ng-switch-when="false">
-                    You don't have an account yet? <a class="alert-link" ui-sref="register">Register a new account</a>
-                </div>
+    </div>
+    <div class="col-md-6">
+        <h1>
+            Losowa drużyna
+        </h1>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Nazwa: </label> {{vm.randomClub.prefix + ' ' + vm.randomClub.location + ' ' +
+                vm.randomClub.estabilished}} <br>
+                <label>Strona domowa: </label> <a href="{{vm.randomClub.homePage}}"
+                                                  target="_blank">{{vm.randomClub.homePage}}</a> <br>
+                <label>Menadżer: </label> {{vm.randomClub.manager ? vm.randomClub.manager.name + ' ' +
+                vm.randomClub.manager.surname : 'Brak'}}<br>
+                <label>Liczba zawodników: </label> {{vm.randomClub.players ? vm.randomClub.players.length : '0'}}
             </div>
-
-            <p>
-                If you have any question on JHipster:
-            </p>
-
-            <ul>
-                <li><a href="http://jhipster.github.io/" target="_blank">JHipster homepage</a></li>
-                <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank">JHipster on Stack Overflow</a></li>
-                <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank">JHipster bug tracker</a></li>
-                <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank">JHipster public chat room</a></li>
-                <li><a href="https://twitter.com/java_hipster" target="_blank" >follow @java_hipster on Twitter</a></li>
-            </ul>
-
-            <p>
-             <span>If you like JHipster, don't forget to give us a star on </span>&nbsp;<a href="https://github.com/jhipster/generator-jhipster" target="_blank">Github</a>!
-            </p>
+            <div class="col-md-6">
+                <a ng-if="vm.randomClub.image.data"
+                   ng-click="vm.openFile(vm.randomClub.image.dataContentType, vm.randomClub.image.data)">
+                    <img
+                        data-ng-src="{{'data:' + vm.randomClub.image.dataContentType + ';base64,' + vm.randomClub.image.data}}"
+                        style="max-height: 100px;"/>
+                </a></div>
         </div>
     </div>
 </div>

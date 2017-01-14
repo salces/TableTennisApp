@@ -2,7 +2,9 @@ package pl.edu.wat.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import pl.edu.wat.domain.League;
+import pl.edu.wat.domain.Round;
 import pl.edu.wat.domain.TableElement;
+import pl.edu.wat.domain.TournamentMatch;
 import pl.edu.wat.service.LeagueService;
 import pl.edu.wat.service.dto.LeagueDTO;
 import pl.edu.wat.service.mapper.LeagueMapper;
@@ -148,4 +150,9 @@ public class LeagueResource {
         return leagueService.getTable(id);
     }
 
+    @RequestMapping(value = "/leagues/lastResults",
+        method = RequestMethod.GET)
+    public List<Round> getLastResults(){
+        return leagueService.getLastResults();
+    }
 }

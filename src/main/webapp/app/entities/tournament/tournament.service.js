@@ -20,7 +20,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'getLastMatches': { method:'GET', isArray: true, params: {id: 'lastMatches'} }
         });
     }
 })();

@@ -1,6 +1,7 @@
 package pl.edu.wat.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import pl.edu.wat.domain.Player;
 import pl.edu.wat.service.PlayerService;
 import pl.edu.wat.web.rest.util.HeaderUtil;
 import pl.edu.wat.web.rest.util.PaginationUtil;
@@ -32,7 +33,7 @@ import java.util.stream.Collectors;
 public class PlayerResource {
 
     private final Logger log = LoggerFactory.getLogger(PlayerResource.class);
-        
+
     @Inject
     private PlayerService playerService;
 
@@ -137,4 +138,11 @@ public class PlayerResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("player", id.toString())).build();
     }
 
+    @RequestMapping(value = "/players/random",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public Player getRandom(){
+        return playerService.getRandom();
+    }
 }

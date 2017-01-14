@@ -1,10 +1,6 @@
 package pl.edu.wat.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import pl.edu.wat.service.ClubService;
-import pl.edu.wat.web.rest.util.HeaderUtil;
-import pl.edu.wat.web.rest.util.PaginationUtil;
-import pl.edu.wat.service.dto.ClubDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,15 +10,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.wat.domain.Club;
+import pl.edu.wat.service.ClubService;
+import pl.edu.wat.service.dto.ClubDTO;
+import pl.edu.wat.web.rest.util.HeaderUtil;
+import pl.edu.wat.web.rest.util.PaginationUtil;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Club.
@@ -32,7 +31,7 @@ import java.util.stream.Collectors;
 public class ClubResource {
 
     private final Logger log = LoggerFactory.getLogger(ClubResource.class);
-        
+
     @Inject
     private ClubService clubService;
 
@@ -135,6 +134,14 @@ public class ClubResource {
         log.debug("REST request to delete Club : {}", id);
         clubService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("club", id.toString())).build();
+    }
+
+    @RequestMapping(value = "/clubs/random",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public Club getRandom(){
+        return clubService.getRandom();
     }
 
 }

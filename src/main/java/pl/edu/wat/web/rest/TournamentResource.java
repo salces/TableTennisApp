@@ -1,7 +1,9 @@
 package pl.edu.wat.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import pl.edu.wat.domain.TournamentMatch;
 import pl.edu.wat.service.TournamentService;
+import pl.edu.wat.service.dto.TournamentStageDTO;
 import pl.edu.wat.web.rest.util.HeaderUtil;
 import pl.edu.wat.web.rest.util.PaginationUtil;
 import pl.edu.wat.service.dto.TournamentDTO;
@@ -32,7 +34,7 @@ import java.util.stream.Collectors;
 public class TournamentResource {
 
     private final Logger log = LoggerFactory.getLogger(TournamentResource.class);
-        
+
     @Inject
     private TournamentService tournamentService;
 
@@ -137,4 +139,11 @@ public class TournamentResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("tournament", id.toString())).build();
     }
 
+    @RequestMapping(value = "/tournaments/lastMatches",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<TournamentStageDTO> getLastMatches(){
+        return tournamentService.getLastMatches();
+    }
 }

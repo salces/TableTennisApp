@@ -5,15 +5,31 @@
         .module('tableTennisApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'Tournament', 'League', 'Player', 'Club', 'DataUtils'];
 
-    function HomeController ($scope, Principal, LoginService, $state) {
+    function HomeController ($scope, Principal, LoginService, $state, Tournament, League, Player, Club, DataUtils) {
         var vm = this;
 
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
         vm.register = register;
+        vm.openFile = DataUtils.openFile;
+        vm.tournamentMatches = Tournament.getLastMatches();
+        vm.leagueResults = League.getLastResults();
+        vm.randomPlayer = Player.getRandom();
+        vm.randomClub = Club.getRandom();
+
+        console.log("matches")
+        console.log(vm.tournamentMatches)
+        console.log("league results")
+        console.log(vm.leagueResults)
+        console.log("player")
+        console.log(vm.randomPlayer)
+        console.log("club")
+        console.log(vm.randomClub)
+
+
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });

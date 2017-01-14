@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 public class PlayerService {
 
     private final Logger log = LoggerFactory.getLogger(PlayerService.class);
-    
+
     @Inject
     private PlayerRepository playerRepository;
 
@@ -47,11 +48,11 @@ public class PlayerService {
 
     /**
      *  Get all the players.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<PlayerDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Players");
         Page<Player> result = playerRepository.findAll(pageable);
@@ -64,7 +65,7 @@ public class PlayerService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public PlayerDTO findOne(Long id) {
         log.debug("Request to get Player : {}", id);
         Player player = playerRepository.findOne(id);
@@ -80,5 +81,12 @@ public class PlayerService {
     public void delete(Long id) {
         log.debug("Request to delete Player : {}", id);
         playerRepository.delete(id);
+    }
+
+
+    public Player getRandom() {
+        List<Player> players = playerRepository.findAll();
+        Random random = new Random();
+        return players.get(random.nextInt(players.size()));
     }
 }

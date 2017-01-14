@@ -1,17 +1,14 @@
 package pl.edu.wat.repository;
 
-import pl.edu.wat.domain.League;
-
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import pl.edu.wat.domain.League;
 
 import java.util.List;
 
-/**
- * Spring Data JPA repository for the League entity.
- */
-@SuppressWarnings("unused")
-public interface LeagueRepository extends JpaRepository<League,Long> {
+
+public interface LeagueRepository extends JpaRepository<League, Long> {
 
     @Query("select distinct league from League league left join fetch league.competitors")
     List<League> findAllWithEagerRelationships();

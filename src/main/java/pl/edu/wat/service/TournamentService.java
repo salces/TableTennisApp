@@ -1,30 +1,30 @@
 package pl.edu.wat.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.edu.wat.domain.Image;
 import pl.edu.wat.domain.Player;
 import pl.edu.wat.domain.Tournament;
 import pl.edu.wat.domain.TournamentStage;
-import pl.edu.wat.domain.enumeration.TournamentPhase;
 import pl.edu.wat.repository.ImageRepository;
 import pl.edu.wat.repository.PlayerRepository;
 import pl.edu.wat.repository.TournamentRepository;
 import pl.edu.wat.repository.TournamentStageRepository;
 import pl.edu.wat.service.dto.TournamentDTO;
+import pl.edu.wat.service.dto.TournamentStageDTO;
 import pl.edu.wat.service.mapper.TournamentMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.stereotype.Service;
+import pl.edu.wat.service.mapper.TournamentStageMapper;
 
 import javax.inject.Inject;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-/**
- * Service Implementation for managing Tournament.
- */
 @Service
 @Transactional
 public class TournamentService {
@@ -46,12 +46,9 @@ public class TournamentService {
     @Inject
     private TournamentStageRepository tournamentStageRepository;
 
-    /**
-     * Save a tournament.
-     *
-     * @param tournamentDTO the entity to save
-     * @return the persisted entity
-     */
+    @Inject
+    private TournamentStageMapper tournamentStageMapper;
+
     public TournamentDTO save(TournamentDTO tournamentDTO) {
         log.debug("Request to save Tournament : {}", tournamentDTO);
         if (!isModelCorrect(tournamentDTO)) {
@@ -138,5 +135,9 @@ public class TournamentService {
             return false;
         }
         return true;
+    }
+
+    public List<TournamentStageDTO> getLastMatches() {
+        return tournamentStageMapper.tournamentStagesToTournamentStageDTOs(tournamentStageRepository.findLastMatches(new PageRequest(0, 5)));
     }
 }
