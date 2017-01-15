@@ -8,6 +8,7 @@ import pl.edu.wat.repository.TournamentMatchRepository;
 import pl.edu.wat.repository.TournamentRepository;
 import pl.edu.wat.repository.TournamentStageRepository;
 import pl.edu.wat.service.dto.TournamentStageDTO;
+import pl.edu.wat.service.mapper.CustomTournamentStageMapper;
 import pl.edu.wat.service.mapper.TournamentStageMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,17 +45,14 @@ public class TournamentStageService {
     @Inject
     private TournamentRepository tournamentRepository;
 
-    /**
-     * Save a tournamentStage.
-     *
-     * @param tournamentStageDTO the entity to save
-     * @return the persisted entity
-     */
+    @Inject
+    private CustomTournamentStageMapper customTournamentStageMapper;
+
     public TournamentStageDTO save(TournamentStageDTO tournamentStageDTO) {
         log.debug("Request to save TournamentStage : {}", tournamentStageDTO);
         TournamentStage tournamentStage = tournamentStageMapper.tournamentStageDTOToTournamentStage(tournamentStageDTO);
         tournamentStage = tournamentStageRepository.save(tournamentStage);
-        TournamentStageDTO result = tournamentStageMapper.tournamentStageToTournamentStageDTO(tournamentStage);
+        TournamentStageDTO result = customTournamentStageMapper.toTournamentStageDTO(tournamentStage);
         return result;
     }
 
@@ -68,7 +66,7 @@ public class TournamentStageService {
     public Page<TournamentStageDTO> findAll(Pageable pageable) {
         log.debug("Request to get all TournamentStages");
         Page<TournamentStage> result = tournamentStageRepository.findAll(pageable);
-        return result.map(tournamentStage -> tournamentStageMapper.tournamentStageToTournamentStageDTO(tournamentStage));
+        return result.map(tournamentStage -> customTournamentStageMapper.toTournamentStageDTO(tournamentStage));
     }
 
     /**
@@ -81,7 +79,7 @@ public class TournamentStageService {
     public TournamentStageDTO findOne(Long id) {
         log.debug("Request to get TournamentStage : {}", id);
         TournamentStage tournamentStage = tournamentStageRepository.findOne(id);
-        TournamentStageDTO tournamentStageDTO = tournamentStageMapper.tournamentStageToTournamentStageDTO(tournamentStage);
+        TournamentStageDTO tournamentStageDTO = customTournamentStageMapper.toTournamentStageDTO(tournamentStage);
         return tournamentStageDTO;
     }
 
@@ -109,7 +107,7 @@ public class TournamentStageService {
         return proceededStage;
     }
 
-    @Transactional
+//    @Transactional
     private TournamentStageDTO proceedFinalStage(TournamentStageDTO tournamentStageDTO) {
         TournamentStage currentTournamentStage =
             tournamentStageRepository.findOne(tournamentStageDTO.getCurrentStageId());
@@ -122,10 +120,10 @@ public class TournamentStageService {
 
         tournamentMatchRepository.save(tournamentMatch);
         tournamentStageRepository.save(currentTournamentStage);
-        return tournamentStageMapper.tournamentStageToTournamentStageDTO(currentTournamentStage);
+        return customTournamentStageMapper.toTournamentStageDTO(currentTournamentStage);
     }
 
-    @Transactional
+//    @Transactional
     private boolean isFinalStage(TournamentStageDTO tournamentStageDTO) {
         TournamentStage currentTournamentStage =
             tournamentStageRepository.findOne(tournamentStageDTO.getCurrentStageId());
@@ -136,7 +134,7 @@ public class TournamentStageService {
         }
     }
 
-    @Transactional
+//    @Transactional
     private TournamentStageDTO proceedNewNextStage(TournamentStageDTO tournamentStageDTO){
         TournamentStage currentTournamentStage =
             tournamentStageRepository.findOne(tournamentStageDTO.getCurrentStageId());
@@ -162,10 +160,10 @@ public class TournamentStageService {
         currentTournamentStage.setNextStage(nextTournamentStage);
         tournamentStageRepository.save(currentTournamentStage);
 
-        return tournamentStageMapper.tournamentStageToTournamentStageDTO(nextTournamentStage);
+        return customTournamentStageMapper.toTournamentStageDTO(nextTournamentStage);
     }
 
-    @Transactional
+//    @Transactional
     private TournamentStageDTO proceedExistingTournament(TournamentStageDTO tournamentStageDTO){
         TournamentStage currentTournamentStage =
             tournamentStageRepository.findOne(tournamentStageDTO.getCurrentStageId());
@@ -206,10 +204,10 @@ public class TournamentStageService {
         currentTournamentStage.setNextStage(existingStage);
         tournamentStageRepository.save(currentTournamentStage);
 
-        return tournamentStageMapper.tournamentStageToTournamentStageDTO(existingStage);
+        return customTournamentStageMapper.toTournamentStageDTO(existingStage);
     }
 
-    @Transactional
+//    @Transactional
     private boolean doesAlreadyExist(TournamentStageDTO tournamentStageDTO){
         TournamentStage currentTournamentStage =
             tournamentStageRepository.findOne(tournamentStageDTO.getCurrentStageId());
@@ -227,7 +225,7 @@ public class TournamentStageService {
     public List<TournamentStageDTO> getForTournament(Long id){
         List<TournamentStage> tournamentStages = new ArrayList<>();
         tournamentStages.addAll(tournamentRepository.findOne(id).getStages());
-        return tournamentStageMapper.tournamentStagesToTournamentStageDTOs(tournamentStages);
+        return customTournamentStageMapper.toTournamentStageDTOs(tournamentStages);
 
     }
 

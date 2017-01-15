@@ -88,7 +88,7 @@ public class ClubResource {
      * @return the ResponseEntity with status 200 (OK) and the list of clubs in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @RequestMapping(value = "/clubs",
+    @RequestMapping(value = "/clubs/public",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -106,7 +106,7 @@ public class ClubResource {
      * @param id the id of the clubDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the clubDTO, or with status 404 (Not Found)
      */
-    @RequestMapping(value = "/clubs/{id}",
+    @RequestMapping(value = "/clubs/public/{id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -120,12 +120,6 @@ public class ClubResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * DELETE  /clubs/:id : delete the "id" club.
-     *
-     * @param id the id of the clubDTO to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
     @RequestMapping(value = "/clubs/{id}",
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -136,7 +130,7 @@ public class ClubResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("club", id.toString())).build();
     }
 
-    @RequestMapping(value = "/clubs/random",
+    @RequestMapping(value = "/clubs/public/random",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed

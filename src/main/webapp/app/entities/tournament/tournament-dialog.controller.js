@@ -32,7 +32,6 @@
         }
 
         function save() {
-            console.log(vm.chosenPlayers)
             vm.tournament.chosenPlayers = toIdArray(vm.chosenPlayers);
             if (vm.tournament.id !== null) {
                 Tournament.update(vm.tournament, onSaveSuccess, onSaveError);

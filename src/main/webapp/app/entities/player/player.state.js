@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/player?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: [],
                 pageTitle: 'Players'
             },
             views: {
@@ -50,7 +50,7 @@
             parent: 'entity',
             url: '/player/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: [],
                 pageTitle: 'Player'
             },
             views: {

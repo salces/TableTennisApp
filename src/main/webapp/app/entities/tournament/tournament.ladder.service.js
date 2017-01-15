@@ -111,6 +111,10 @@
             }
 
             function addStage(prevStage, result, newStage) {
+                console.log('prev stage')
+                console.log(prevStage)
+                console.log('newStage')
+                console.log(newStage)
                 vm.myDiagram.startTransaction('add stage');
                 var key;
                 if (!doesExistEmpty() && !isComplete(newStage)) {

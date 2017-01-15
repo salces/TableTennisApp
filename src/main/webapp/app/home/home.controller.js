@@ -20,16 +20,6 @@
         vm.randomPlayer = Player.getRandom();
         vm.randomClub = Club.getRandom();
 
-        console.log("matches")
-        console.log(vm.tournamentMatches)
-        console.log("league results")
-        console.log(vm.leagueResults)
-        console.log("player")
-        console.log(vm.randomPlayer)
-        console.log("club")
-        console.log(vm.randomClub)
-
-
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });

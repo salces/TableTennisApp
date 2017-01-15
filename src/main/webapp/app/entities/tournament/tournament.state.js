@@ -13,7 +13,7 @@
                 parent: 'entity',
                 url: '/tournament?page&sort&search',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: [],
                     pageTitle: 'Tournaments'
                 },
                 views: {
@@ -50,7 +50,7 @@
                 parent: 'entity',
                 url: '/tournament/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: [],
                     pageTitle: 'Tournament'
                 },
                 views: {
@@ -180,7 +180,7 @@
                 parent: 'tournament-detail',
                 url: '/tournament/ladder/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: [],
                     pageTitle: 'Tournament'
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {

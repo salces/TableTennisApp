@@ -6,9 +6,7 @@ import pl.edu.wat.service.dto.TournamentStageDTO;
 import org.mapstruct.*;
 import java.util.List;
 
-/**
- * Mapper for the entity TournamentStage and its DTO TournamentStageDTO.
- */
+
 @Mapper(componentModel = "spring", uses = {})
 public interface TournamentStageMapper {
 

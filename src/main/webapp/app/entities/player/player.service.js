@@ -7,10 +7,10 @@
     Player.$inject = ['$resource'];
 
     function Player ($resource) {
-        var resourceUrl =  'api/players/:id';
+        var resourceUrl =  'api/players/:public/:id';
 
         return $resource(resourceUrl, {}, {
-            'query': { method: 'GET', isArray: true},
+            'query': { method: 'GET', isArray: true, params: {public: 'public'}},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
@@ -18,10 +18,10 @@
                         data = angular.fromJson(data);
                     }
                     return data;
-                }
+                }, params: {public: 'public'}
             },
             'update': { method:'PUT' },
-            'getRandom': {method: 'get', isArray: false, params: {id: 'random'}}
+            'getRandom': {method: 'get', isArray: false, params: {public: 'public', id: 'random'}}
         });
     }
 })();

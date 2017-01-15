@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/club?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: [],
                 pageTitle: 'Clubs'
             },
             views: {
@@ -50,7 +50,7 @@
             parent: 'entity',
             url: '/club/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: [],
                 pageTitle: 'Club'
             },
             views: {

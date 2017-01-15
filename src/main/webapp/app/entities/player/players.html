@@ -3,10 +3,10 @@
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="player.new" >
+            <div class="col-xs-4 no-padding-left" has-authority="ROLE_USER">
+                <button class="btn btn-primary" ui-sref="player.new">
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span >
+                    <span>
                         Dodaj nowego zawodnika
                     </span>
                 </button>
@@ -17,56 +17,58 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span>Imie</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="surname"><span>Nazwisko</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="nationality"><span>Narodowość</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="height"><span>Wzrost</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="clubPrefix"><span>Klub</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="imageAlias"><span>Obraz</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="name"><span>Imie</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="surname"><span>Nazwisko</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="nationality"><span>Narodowość</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="height"><span>Wzrost</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="clubPrefix"><span>Klub</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="imageAlias"><span>Obraz</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th></th>
+            </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="player in vm.players track by player.id">
-                    <td><a ui-sref="player-detail({id:player.id})">{{player.id}}</a></td>
-                    <td>{{player.name}}</td>
-                    <td>{{player.surname}}</td>
-                    <td>{{player.nationality}}</td>
-                    <td>{{player.height}}</td>
-                    <td>
-                        {{player.managerLogin}}
-                    </td>
-                    <td>
-                        <a ui-sref="club-detail({id:player.clubId})">{{player.clubPrefix}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="image-detail({id:player.imageId})">{{player.imageAlias}}</a>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="player-detail({id:player.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="player.edit({id:player.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="player.delete({id:player.id})"
-                                    class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+            <tr ng-repeat="player in vm.players track by player.id">
+                <td><a ui-sref="player-detail({id:player.id})">{{player.id}}</a></td>
+                <td>{{player.name}}</td>
+                <td>{{player.surname}}</td>
+                <td>{{player.nationality}}</td>
+                <td>{{player.height}}</td>
+                <td>
+                    {{player.managerLogin}}
+                </td>
+                <td>
+                    <a ui-sref="club-detail({id:player.clubId})">{{player.clubPrefix}}</a>
+                </td>
+                <td>
+                    <a ui-sref="image-detail({id:player.imageId})">{{player.imageAlias}}</a>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="player-detail({id:player.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <span class="hidden-xs hidden-sm"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="player.edit({id:player.id})"
+                                class="btn btn-primary btn-sm"
+                                has-authority="ROLE_USER">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="hidden-xs hidden-sm"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="player.delete({id:player.id})"
+                                class="btn btn-danger btn-sm"
+                                has-authority="ROLE_USER">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <span class="hidden-xs hidden-sm"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

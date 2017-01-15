@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/league?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: [],
                 pageTitle: 'Leagues'
             },
             views: {
@@ -50,7 +50,7 @@
             parent: 'entity',
             url: '/league/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: [],
                 pageTitle: 'League'
             },
             views: {
@@ -78,7 +78,7 @@
                 parent: 'league-detail',
                 url: '/league/{id}/table',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: [],
                     pageTitle: 'Tabela ligi'
                 },
                 views: {

@@ -17,6 +17,7 @@ import pl.edu.wat.repository.TournamentRepository;
 import pl.edu.wat.repository.TournamentStageRepository;
 import pl.edu.wat.service.dto.TournamentDTO;
 import pl.edu.wat.service.dto.TournamentStageDTO;
+import pl.edu.wat.service.mapper.CustomTournamentStageMapper;
 import pl.edu.wat.service.mapper.TournamentMapper;
 import pl.edu.wat.service.mapper.TournamentStageMapper;
 
@@ -47,7 +48,7 @@ public class TournamentService {
     private TournamentStageRepository tournamentStageRepository;
 
     @Inject
-    private TournamentStageMapper tournamentStageMapper;
+    private CustomTournamentStageMapper customTournamentStageMapper;
 
     public TournamentDTO save(TournamentDTO tournamentDTO) {
         log.debug("Request to save Tournament : {}", tournamentDTO);
@@ -138,6 +139,6 @@ public class TournamentService {
     }
 
     public List<TournamentStageDTO> getLastMatches() {
-        return tournamentStageMapper.tournamentStagesToTournamentStageDTOs(tournamentStageRepository.findLastMatches(new PageRequest(0, 5)));
+        return customTournamentStageMapper.toTournamentStageDTOs(tournamentStageRepository.findLastMatches(new PageRequest(0, 5)));
     }
 }

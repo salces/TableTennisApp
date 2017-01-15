@@ -5,11 +5,17 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import pl.edu.wat.domain.enumeration.TournamentPhase;
 
 /**
  * A DTO for the TournamentStage entity.
  */
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class TournamentStageDTO implements Serializable {
 
     private Long id;
@@ -44,6 +50,8 @@ public class TournamentStageDTO implements Serializable {
     private int secondPlayerScore;
 
     private long currentStageId;
+
+    private String tournamentName;
 
 
     public Long getId() {
@@ -170,6 +178,14 @@ public class TournamentStageDTO implements Serializable {
 
     public void setCurrentStageId(long currentStageId) {
         this.currentStageId = currentStageId;
+    }
+
+    public String getTournamentName() {
+        return tournamentName;
+    }
+
+    public void setTournamentName(String tournamentName) {
+        this.tournamentName = tournamentName;
     }
 
     @Override

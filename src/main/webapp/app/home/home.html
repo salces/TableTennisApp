@@ -24,8 +24,16 @@
             Ostatnie wyniki turniejowe
         </h1>
         <table class="table table-striped table-bordered">
-            <th>Nazwa ligi</th>
-            <th>Liczba</th>
+            <th>Nazwa turnieju</th>
+            <th>Pierwszy zawodnik</th>
+            <th>Drugi zawodnik</th>
+            <th>Wynik</th>
+            <tr ng-repeat="match in vm.tournamentMatches">
+                <td>{{match.tournamentName}}</td>
+                <td>{{match.firstPlayerName + ' ' + match.firstPlayerSurname}}</td>
+                <td>{{match.secondPlayerName + ' ' + match.secondPlayerSurname}}</td>
+                <td>{{match.firstPlayerScore + ':' + match.secondPlayerScore}}</td>
+            </tr>
         </table>
     </div>
 </div>

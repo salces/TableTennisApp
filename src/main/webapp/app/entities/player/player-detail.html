@@ -36,7 +36,7 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Cofnij</span>
     </button>
 
-    <button type="button" ui-sref="player-detail.edit({id:vm.player.id})" class="btn btn-primary">
+    <button type="button" ui-sref="player-detail.edit({id:vm.player.id})" class="btn btn-primary" has-authority="ROLE_USER">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-xs hidden-sm"> Edytuj</span>
     </button>

@@ -7,10 +7,10 @@
     Tournament.$inject = ['$resource'];
 
     function Tournament ($resource) {
-        var resourceUrl =  'api/tournaments/:id';
+        var resourceUrl =  'api/tournaments/:public/:id';
 
         return $resource(resourceUrl, {}, {
-            'query': { method: 'GET', isArray: true},
+            'query': { method: 'GET', isArray: true, params: {public: 'public'}},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
@@ -18,10 +18,10 @@
                         data = angular.fromJson(data);
                     }
                     return data;
-                }
+                }, params: {public: 'public'}
             },
             'update': { method:'PUT' },
-            'getLastMatches': { method:'GET', isArray: true, params: {id: 'lastMatches'} }
+            'getLastMatches': { method:'GET', isArray: true, params: {public: 'public', id: 'lastMatches'} }
         });
     }
 })();

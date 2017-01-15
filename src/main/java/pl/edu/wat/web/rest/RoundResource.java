@@ -140,9 +140,6 @@ public class RoundResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public void addMatch(@RequestBody RoundMatchDTO roundMatchDTO) {
-        System.out.println("Id:" + roundMatchDTO.getId());
-        System.out.println("Id:" + roundMatchDTO.getFirstClubScore());
-        System.out.println("Id:" + roundMatchDTO.getSecondClubScore());
         roundService.addMatch(roundMatchDTO);
     }
 

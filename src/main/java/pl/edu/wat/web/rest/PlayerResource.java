@@ -90,7 +90,7 @@ public class PlayerResource {
      * @return the ResponseEntity with status 200 (OK) and the list of players in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @RequestMapping(value = "/players",
+    @RequestMapping(value = "/players/public",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -108,7 +108,7 @@ public class PlayerResource {
      * @param id the id of the playerDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the playerDTO, or with status 404 (Not Found)
      */
-    @RequestMapping(value = "/players/{id}",
+    @RequestMapping(value = "/players/public/{id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -122,12 +122,6 @@ public class PlayerResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * DELETE  /players/:id : delete the "id" player.
-     *
-     * @param id the id of the playerDTO to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
     @RequestMapping(value = "/players/{id}",
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -138,7 +132,7 @@ public class PlayerResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("player", id.toString())).build();
     }
 
-    @RequestMapping(value = "/players/random",
+    @RequestMapping(value = "/players/public/random",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed

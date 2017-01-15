@@ -117,7 +117,6 @@ public class TournamentStageResource {
     public ResponseEntity<List<TournamentStageDTO>> getStagesForTournament(@PathVariable Long id) {
         log.debug("REST request to get TournamentStage : {}", id);
         List<TournamentStageDTO> tournamentStageDTO = tournamentStageService.getForTournament(id);
-        tournamentStageDTO.forEach(t -> System.out.println(t.getFirstPlayerName()));
         return Optional.ofNullable(tournamentStageDTO)
             .map(result -> new ResponseEntity<>(
                 result,

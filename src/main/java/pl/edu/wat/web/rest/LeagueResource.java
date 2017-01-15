@@ -42,13 +42,6 @@ public class LeagueResource {
     @Inject
     private LeagueMapper leagueMapper;
 
-    /**
-     * POST  /leagues : Create a new league.
-     *
-     * @param league the league to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new league, or with status 400 (Bad Request) if the league has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
     @RequestMapping(value = "/leagues",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -96,7 +89,7 @@ public class LeagueResource {
      * @return the ResponseEntity with status 200 (OK) and the list of leagues in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @RequestMapping(value = "/leagues",
+    @RequestMapping(value = "/leagues/public",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -114,7 +107,7 @@ public class LeagueResource {
      * @param id the id of the league to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the league, or with status 404 (Not Found)
      */
-    @RequestMapping(value = "/leagues/{id}",
+    @RequestMapping(value = "/leagues/public/{id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -144,13 +137,13 @@ public class LeagueResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("league", id.toString())).build();
     }
 
-    @RequestMapping(value = "/leagues/table",
+    @RequestMapping(value = "/leagues/public/table",
         method = RequestMethod.POST)
     public List<TableElement> getTable(@RequestBody Long id){
         return leagueService.getTable(id);
     }
 
-    @RequestMapping(value = "/leagues/lastResults",
+    @RequestMapping(value = "/leagues/public/lastResults",
         method = RequestMethod.GET)
     public List<Round> getLastResults(){
         return leagueService.getLastResults();
