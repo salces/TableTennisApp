@@ -65,6 +65,16 @@ public class Club implements Serializable {
     @JsonIgnore
     private Set<League> leagues = new HashSet<>();
 
+    private boolean isDeleted = false;
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public Long getId() {
         return id;
     }

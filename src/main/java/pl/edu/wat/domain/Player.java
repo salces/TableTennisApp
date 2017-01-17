@@ -56,6 +56,14 @@ public class Player implements Serializable {
     @ManyToOne
     private Image image;
 
+    private boolean isDeleted = false;
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean isDeleted){ this.isDeleted = isDeleted;}
+
     public Long getId() {
         return id;
     }

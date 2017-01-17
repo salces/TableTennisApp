@@ -2,13 +2,11 @@ package pl.edu.wat.domain;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * A Image.
- */
 @Entity
 @Table(name = "image")
 public class Image implements Serializable {
@@ -38,6 +36,16 @@ public class Image implements Serializable {
 
     @ManyToOne
     private User owner;
+
+    private boolean isDeleted = false;
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 
     public Long getId() {
         return id;

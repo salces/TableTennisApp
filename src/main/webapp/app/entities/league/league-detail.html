@@ -26,7 +26,7 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Cofnij</span>
     </button>
 
-    <button type="button" ui-sref="league-detail.edit({id:vm.league.id})" class="btn btn-primary">
+    <button type="button" ui-sref="league-detail.edit({id:vm.league.id})" class="btn btn-primary" has-authority="ROLE_USER">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-xs hidden-sm"> Edytuj</span>
     </button>
@@ -36,7 +36,7 @@
         <span class="hidden-xs hidden-sm">Rundy</span>
     </button>
 
-    <button type="button" ui-sref="league-table" class="btn btn-primary" has-authority="ROLE_USER">
+    <button type="button" ui-sref="league-table" class="btn btn-primary">
         <span class="glyphicon glyphicon-th-list"></span>
         <span class="hidden-xs hidden-sm">Tabela</span>
     </button>

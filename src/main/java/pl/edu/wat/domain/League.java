@@ -40,6 +40,16 @@ public class League implements Serializable {
     @JsonIgnore
     private Set<Round> rounds = new HashSet<>();
 
+    private boolean isDeleted = false;
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public Long getId() {
         return id;
     }

@@ -11,6 +11,6 @@ public interface RoundRepository extends JpaRepository<Round,Long> {
 
     List<Round> findByLeagueIdOrderByOrdinalAscHaAsc(Long id);
 
-    @Query("select round from Round round where round.tournamentMatch is not null order by round.id desc")
-    List<Round> findLastRounds(Pageable pageable);
+    @Query("select round from Round round where round.tournamentMatch is not null and round.league.isDeleted = :isDeleted order by round.id desc")
+    List<Round> findLastRounds(boolean isDeleted, Pageable pageable);
 }

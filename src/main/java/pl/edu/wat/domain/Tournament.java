@@ -35,6 +35,15 @@ public class Tournament implements Serializable {
 //    @JsonIgnore
     private Set<TournamentStage> stages = new HashSet<>();
 
+    private boolean isDeleted = false;
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean isDeleted){ this.isDeleted = isDeleted;}
+
+
     public Tournament() {
     }
 

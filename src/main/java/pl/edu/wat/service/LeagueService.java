@@ -48,7 +48,7 @@ public class LeagueService {
     @Transactional(readOnly = true)
     public Page<League> findAll(Pageable pageable) {
         log.debug("Request to get all Leagues");
-        Page<League> result = leagueRepository.findAll(pageable);
+        Page<League> result = leagueRepository.findAllByIsDeleted(false,pageable);
         return result;
     }
 
@@ -65,14 +65,11 @@ public class LeagueService {
         return league;
     }
 
-    /**
-     * Delete the  league by id.
-     *
-     * @param id the id of the entity
-     */
     public void delete(Long id) {
         log.debug("Request to delete League : {}", id);
-        leagueRepository.delete(id);
+        League league = leagueRepository.findOne(id);
+        league.setDeleted(true);
+        leagueRepository.save(league);
     }
 
     public League createLeague(LeagueDTO leagueDTO) {
@@ -326,6 +323,6 @@ public class LeagueService {
     }
 
     public List<Round> getLastResults() {
-        return roundRepository.findLastRounds(new PageRequest(0,5));
+        return roundRepository.findLastRounds(false, new PageRequest(0,5));
     }
 }

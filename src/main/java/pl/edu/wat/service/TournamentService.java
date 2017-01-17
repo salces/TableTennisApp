@@ -71,7 +71,7 @@ public class TournamentService {
     @Transactional(readOnly = true)
     public Page<TournamentDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Tournaments");
-        Page<Tournament> result = tournamentRepository.findAll(pageable);
+        Page<Tournament> result = tournamentRepository.findAllByIsDeleted(false, pageable);
         return result.map(tournament -> tournamentMapper.tournamentToTournamentDTO(tournament));
     }
 
@@ -139,6 +139,6 @@ public class TournamentService {
     }
 
     public List<TournamentStageDTO> getLastMatches() {
-        return customTournamentStageMapper.toTournamentStageDTOs(tournamentStageRepository.findLastMatches(new PageRequest(0, 5)));
+        return customTournamentStageMapper.toTournamentStageDTOs(tournamentStageRepository.findLastMatches(false, new PageRequest(0, 5)));
     }
 }

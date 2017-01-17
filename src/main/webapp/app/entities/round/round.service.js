@@ -7,7 +7,7 @@
     Round.$inject = ['$resource'];
 
     function Round ($resource) {
-        var resourceUrl =  'api/rounds/:id';
+        var resourceUrl =  'api/rounds/:public/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
@@ -21,7 +21,7 @@
                 }
             },
             'update': { method:'PUT' },
-            'getForTournament': {method : 'GET', isArray:true},
+            'getForTournament': {method : 'GET', isArray:true, params:{public: 'public'}},
             'addMatch' : {method: 'POST', params: {id : 'match'}}
         });
     }

@@ -55,7 +55,7 @@ public class PlayerService {
     @Transactional(readOnly = true)
     public Page<PlayerDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Players");
-        Page<Player> result = playerRepository.findAll(pageable);
+        Page<Player> result = playerRepository.findAllByIsDeleted(false,pageable);
         return result.map(player -> playerMapper.playerToPlayerDTO(player));
     }
 
@@ -85,7 +85,7 @@ public class PlayerService {
 
 
     public Player getRandom() {
-        List<Player> players = playerRepository.findAll();
+        List<Player> players = playerRepository.findAllByIsDeleted(false);
         Random random = new Random();
         return players.get(random.nextInt(players.size()));
     }

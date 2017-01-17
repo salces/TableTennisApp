@@ -41,7 +41,7 @@ public class ClubService {
     @Transactional(readOnly = true)
     public Page<ClubDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Clubs");
-        Page<Club> result = clubRepository.findAll(pageable);
+        Page<Club> result = clubRepository.findAllByIsDeleted(false,pageable);
         return result.map(club -> clubMapper.clubToClubDTO(club));
     }
 
@@ -56,12 +56,14 @@ public class ClubService {
 
     public void delete(Long id) {
         log.debug("Request to delete Club : {}", id);
-        clubRepository.delete(id);
+        Club club = clubRepository.findOne(id);
+        club.setDeleted(true);
+        clubRepository.save(club);
     }
 
     public Club getRandom() {
         log.debug("Request to get random Club");
-        List<Club> clubs = clubRepository.findAll();
+        List<Club> clubs = clubRepository.findAllByIsDeleted(false);
         Random random = new Random();
         return clubs.get(random.nextInt(clubs.size()));
     }

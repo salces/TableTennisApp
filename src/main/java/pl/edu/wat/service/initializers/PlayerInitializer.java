@@ -65,9 +65,9 @@ public class PlayerInitializer {
                 .nationality("Germany")
                 .height(201).build(),
             Player.builder()
-                .name("Galileo")
-                .surname("Galilei")
-                .nationality("Italy")
+                .name("Dimitri")
+                .surname("Mendelejer")
+                .nationality("Russia")
                 .height(201).build(),
             Player.builder()
                 .name("Nikola")
@@ -75,9 +75,9 @@ public class PlayerInitializer {
                 .nationality("Serbia")
                 .height(201).build(),
             Player.builder()
-                .name("Galileo")
-                .surname("Galilei")
-                .nationality("Italy")
+                .name("Friedrich")
+                .surname("Nietzsche")
+                .nationality("Germany")
                 .height(175).build(),
             Player.builder()
                 .name("Mikolaj")

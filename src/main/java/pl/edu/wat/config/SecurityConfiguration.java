@@ -131,6 +131,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/leagues/public/**").permitAll()
             .antMatchers("/api/tournaments/public/**").permitAll()
             .antMatchers("/api/tournaments/public").permitAll()
+            .antMatchers("/api/rounds/public/**").permitAll()
+            .antMatchers("/api/rounds/public").permitAll()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/v2/api-docs/**").permitAll()

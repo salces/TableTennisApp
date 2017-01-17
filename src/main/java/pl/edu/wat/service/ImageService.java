@@ -1,30 +1,24 @@
 package pl.edu.wat.service;
 
-import pl.edu.wat.domain.Image;
-import pl.edu.wat.repository.ImageRepository;
-import pl.edu.wat.service.dto.ImageDTO;
-import pl.edu.wat.service.mapper.ImageMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import pl.edu.wat.domain.Image;
+import pl.edu.wat.repository.ImageRepository;
+import pl.edu.wat.service.dto.ImageDTO;
+import pl.edu.wat.service.mapper.ImageMapper;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
 
-/**
- * Service Implementation for managing Image.
- */
 @Service
 @Transactional
 public class ImageService {
 
     private final Logger log = LoggerFactory.getLogger(ImageService.class);
-    
+
     @Inject
     private ImageRepository imageRepository;
 
@@ -47,14 +41,14 @@ public class ImageService {
 
     /**
      *  Get all the images.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<ImageDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Images");
-        Page<Image> result = imageRepository.findAll(pageable);
+        Page<Image> result = imageRepository.findAllByIsDeleted(false,pageable);
         return result.map(image -> imageMapper.imageToImageDTO(image));
     }
 
@@ -64,7 +58,7 @@ public class ImageService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public ImageDTO findOne(Long id) {
         log.debug("Request to get Image : {}", id);
         Image image = imageRepository.findOne(id);
@@ -79,6 +73,8 @@ public class ImageService {
      */
     public void delete(Long id) {
         log.debug("Request to delete Image : {}", id);
-        imageRepository.delete(id);
+        Image image = imageRepository.findOne(id);
+        image.setDeleted(true);
+        imageRepository.save(image);
     }
 }

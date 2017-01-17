@@ -105,7 +105,7 @@ public class RoundResource {
      * @param id the id of the round to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the round, or with status 404 (Not Found)
      */
-    @RequestMapping(value = "/rounds/{id}",
+    @RequestMapping(value = "/rounds/public/{id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
