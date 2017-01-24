@@ -1,6 +1,5 @@
 <div>
     <h2>Zawodnicy</h2>
-    <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left" has-authority="ROLE_USER">
@@ -35,9 +34,6 @@
                 <td>{{player.surname}}</td>
                 <td>{{player.nationality}}</td>
                 <td>{{player.height}}</td>
-                <td>
-                    {{player.managerLogin}}
-                </td>
                 <td>
                     <a ui-sref="club-detail({id:player.clubId})">{{player.clubPrefix}}</a>
                 </td>

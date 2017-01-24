@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CustomTournamentStageMapper {
+public class TournamentStageMapperImpl implements TournamentStageMapper {
 
-    public TournamentStageDTO toTournamentStageDTO(TournamentStage tournamentStage) {
+    @Override
+    public TournamentStageDTO tournamentStageToTournamentStageDTO(TournamentStage tournamentStage) {
         TournamentStageDTO tournamentStageDTO = TournamentStageDTO.builder()
             .id(tournamentStage.getId())
             .phase(tournamentStage.getPhase())
@@ -46,9 +47,20 @@ public class CustomTournamentStageMapper {
         return tournamentStageDTO;
     }
 
-    public List<TournamentStageDTO> toTournamentStageDTOs(List<TournamentStage> tournamentStages) {
+    public List<TournamentStageDTO> tournamentStagesToTournamentStageDTOs(List<TournamentStage> tournamentStages) {
         List<TournamentStageDTO> tournamentStageDTOs = new ArrayList<>();
-        tournamentStages.forEach(ts -> tournamentStageDTOs.add(toTournamentStageDTO(ts)));
+        tournamentStages.forEach(ts -> tournamentStageDTOs.add(tournamentStageToTournamentStageDTO(ts)));
         return tournamentStageDTOs;
     }
+
+    @Override
+    public TournamentStage tournamentStageDTOToTournamentStage(TournamentStageDTO tournamentStageDTO) {
+        return null;
+    }
+
+    @Override
+    public List<TournamentStage> tournamentStageDTOsToTournamentStages(List<TournamentStageDTO> tournamentStageDTOs) {
+        return null;
+    }
+
 }

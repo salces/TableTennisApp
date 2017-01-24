@@ -13,7 +13,7 @@
         vm.tournament = entity;
         vm.clear = clear;
         vm.confirmDelete = confirmDelete;
-        
+
         function clear () {
             $uibModalInstance.dismiss('cancel');
         }
@@ -22,6 +22,10 @@
             Tournament.delete({id: id},
                 function () {
                     $uibModalInstance.close(true);
+                    Notification.success('Liga został usunięty pomyślnie');
+
+                }, function () {
+                    Notification.error('Wystąpił błąd podczas usuwania turnieju');
                 });
         }
     }

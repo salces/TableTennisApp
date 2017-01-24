@@ -15,5 +15,4 @@ public interface PlayerRepository extends JpaRepository<Player,Long> {
 
     List<Player> findAllByIsDeleted(boolean isDeleted);
     Page<Player> findAllByIsDeleted(boolean isDeleted, Pageable pageable);
-
 }

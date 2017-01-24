@@ -25,6 +25,9 @@ public class ImageService {
     @Inject
     private ImageMapper imageMapper;
 
+    @Inject
+    private LoggedUserService loggedUserService;
+
     /**
      * Save a image.
      *
@@ -34,6 +37,7 @@ public class ImageService {
     public ImageDTO save(ImageDTO imageDTO) {
         log.debug("Request to save Image : {}", imageDTO);
         Image image = imageMapper.imageDTOToImage(imageDTO);
+        image.setOwner(loggedUserService.getLoggedUser());
         image = imageRepository.save(image);
         ImageDTO result = imageMapper.imageToImageDTO(image);
         return result;

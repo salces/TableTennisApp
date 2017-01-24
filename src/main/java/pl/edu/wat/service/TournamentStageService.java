@@ -1,5 +1,11 @@
 package pl.edu.wat.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.edu.wat.domain.Tournament;
 import pl.edu.wat.domain.TournamentMatch;
 import pl.edu.wat.domain.TournamentStage;
@@ -8,25 +14,13 @@ import pl.edu.wat.repository.TournamentMatchRepository;
 import pl.edu.wat.repository.TournamentRepository;
 import pl.edu.wat.repository.TournamentStageRepository;
 import pl.edu.wat.service.dto.TournamentStageDTO;
-import pl.edu.wat.service.mapper.CustomTournamentStageMapper;
 import pl.edu.wat.service.mapper.TournamentStageMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
-/**
- * Service Implementation for managing TournamentStage.
- */
+
 @Service
 @Transactional
 public class TournamentStageService {
@@ -46,13 +40,13 @@ public class TournamentStageService {
     private TournamentRepository tournamentRepository;
 
     @Inject
-    private CustomTournamentStageMapper customTournamentStageMapper;
+    private TournamentStageMapper customTournamentStageMapper;
 
     public TournamentStageDTO save(TournamentStageDTO tournamentStageDTO) {
         log.debug("Request to save TournamentStage : {}", tournamentStageDTO);
         TournamentStage tournamentStage = tournamentStageMapper.tournamentStageDTOToTournamentStage(tournamentStageDTO);
         tournamentStage = tournamentStageRepository.save(tournamentStage);
-        TournamentStageDTO result = customTournamentStageMapper.toTournamentStageDTO(tournamentStage);
+        TournamentStageDTO result = customTournamentStageMapper.tournamentStageToTournamentStageDTO(tournamentStage);
         return result;
     }
 
@@ -66,7 +60,7 @@ public class TournamentStageService {
     public Page<TournamentStageDTO> findAll(Pageable pageable) {
         log.debug("Request to get all TournamentStages");
         Page<TournamentStage> result = tournamentStageRepository.findAll(pageable);
-        return result.map(tournamentStage -> customTournamentStageMapper.toTournamentStageDTO(tournamentStage));
+        return result.map(tournamentStage -> customTournamentStageMapper.tournamentStageToTournamentStageDTO(tournamentStage));
     }
 
     /**
@@ -79,7 +73,7 @@ public class TournamentStageService {
     public TournamentStageDTO findOne(Long id) {
         log.debug("Request to get TournamentStage : {}", id);
         TournamentStage tournamentStage = tournamentStageRepository.findOne(id);
-        TournamentStageDTO tournamentStageDTO = customTournamentStageMapper.toTournamentStageDTO(tournamentStage);
+        TournamentStageDTO tournamentStageDTO = customTournamentStageMapper.tournamentStageToTournamentStageDTO(tournamentStage);
         return tournamentStageDTO;
     }
 
@@ -120,7 +114,7 @@ public class TournamentStageService {
 
         tournamentMatchRepository.save(tournamentMatch);
         tournamentStageRepository.save(currentTournamentStage);
-        return customTournamentStageMapper.toTournamentStageDTO(currentTournamentStage);
+        return customTournamentStageMapper.tournamentStageToTournamentStageDTO(currentTournamentStage);
     }
 
 //    @Transactional
@@ -160,7 +154,7 @@ public class TournamentStageService {
         currentTournamentStage.setNextStage(nextTournamentStage);
         tournamentStageRepository.save(currentTournamentStage);
 
-        return customTournamentStageMapper.toTournamentStageDTO(nextTournamentStage);
+        return customTournamentStageMapper.tournamentStageToTournamentStageDTO(nextTournamentStage);
     }
 
 //    @Transactional
@@ -204,7 +198,7 @@ public class TournamentStageService {
         currentTournamentStage.setNextStage(existingStage);
         tournamentStageRepository.save(currentTournamentStage);
 
-        return customTournamentStageMapper.toTournamentStageDTO(existingStage);
+        return customTournamentStageMapper.tournamentStageToTournamentStageDTO(existingStage);
     }
 
 //    @Transactional
@@ -225,7 +219,7 @@ public class TournamentStageService {
     public List<TournamentStageDTO> getForTournament(Long id){
         List<TournamentStage> tournamentStages = new ArrayList<>();
         tournamentStages.addAll(tournamentRepository.findOne(id).getStages());
-        return customTournamentStageMapper.toTournamentStageDTOs(tournamentStages);
+        return customTournamentStageMapper.tournamentStagesToTournamentStageDTOs(tournamentStages);
 
     }
 

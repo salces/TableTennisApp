@@ -137,6 +137,7 @@ public class LeagueService {
         league.setName(leagueDTO.getName());
         league.image(leagueDTO.getImage());
 
+
         List<Club> competitors = leagueDTO.getCompetitors();
         List<Round> rounds = new ArrayList<>();
 

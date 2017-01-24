@@ -5,9 +5,9 @@
         .module('tableTennisApp')
         .controller('TournamentController', TournamentController);
 
-    TournamentController.$inject = ['$scope', '$state', 'Tournament', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
+    TournamentController.$inject = ['$scope', '$state', 'Tournament', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants', 'Notification'];
 
-    function TournamentController ($scope, $state, Tournament, ParseLinks, AlertService, pagingParams, paginationConstants) {
+    function TournamentController ($scope, $state, Tournament, ParseLinks, AlertService, pagingParams, paginationConstants, Notification) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -39,6 +39,7 @@
                 vm.page = pagingParams.page;
             }
             function onError(error) {
+                Notification.error('Wystąpił bład podczas ładowania danych')
                 AlertService.error(error.data.message);
             }
         }

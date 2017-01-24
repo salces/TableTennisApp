@@ -30,9 +30,13 @@ public class ClubService {
     @Inject
     private ClubMapper clubMapper;
 
+    @Inject
+    private LoggedUserService loggedUserService;
+
     public ClubDTO save(ClubDTO clubDTO) {
         log.debug("Request to save Club : {}", clubDTO);
         Club club = clubMapper.clubDTOToClub(clubDTO);
+        club.setManager(loggedUserService.getLoggedUser());
         club = clubRepository.save(club);
         ClubDTO result = clubMapper.clubToClubDTO(club);
         return result;

@@ -1,10 +1,10 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
             ng-click="vm.clear()">&times;</button>
-    <h4 class="modal-title" id="myTournamentLabel">Rundy</h4>
+    <h4 class="modal-title" id="myTournamentLabel">Dodaj wynikz</h4>
 </div>
 <div class="modal-body">
-    <table>
+    <table class="table table-striped">
         <th>Druzyna</th>
         <th>Wynik</th>
         <tr>
@@ -20,5 +20,5 @@
             <td><input type="number" ng-model="vm.result.secondClubScore" max="3" step="1"></td>
         </tr>
     </table>
-    <input type="button" value="Zapisz wynik" ng-click="vm.edit()">
+    <input type="button" class="btn btn-success" value="Zapisz wynik" ng-click="vm.edit()">
 </div>

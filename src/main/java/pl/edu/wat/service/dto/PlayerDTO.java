@@ -1,15 +1,18 @@
 package pl.edu.wat.service.dto;
 
-import javax.validation.constraints.*;
+import lombok.*;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
 
-
-/**
- * A DTO for the Player entity.
- */
+@Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PlayerDTO implements Serializable {
 
     private Long id;
@@ -31,138 +34,15 @@ public class PlayerDTO implements Serializable {
     @Max(value = 240)
     private Integer height;
 
-
     private Long managerId;
-    
 
     private String managerLogin;
 
     private Long clubId;
-    
 
     private String clubPrefix;
 
     private Long imageId;
-    
 
     private String imageAlias;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public Long getManagerId() {
-        return managerId;
-    }
-
-    public void setManagerId(Long userId) {
-        this.managerId = userId;
-    }
-
-
-    public String getManagerLogin() {
-        return managerLogin;
-    }
-
-    public void setManagerLogin(String userLogin) {
-        this.managerLogin = userLogin;
-    }
-
-    public Long getClubId() {
-        return clubId;
-    }
-
-    public void setClubId(Long clubId) {
-        this.clubId = clubId;
-    }
-
-
-    public String getClubPrefix() {
-        return clubPrefix;
-    }
-
-    public void setClubPrefix(String clubPrefix) {
-        this.clubPrefix = clubPrefix;
-    }
-
-    public Long getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(Long imageId) {
-        this.imageId = imageId;
-    }
-
-
-    public String getImageAlias() {
-        return imageAlias;
-    }
-
-    public void setImageAlias(String imageAlias) {
-        this.imageAlias = imageAlias;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        PlayerDTO playerDTO = (PlayerDTO) o;
-
-        if ( ! Objects.equals(id, playerDTO.id)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "PlayerDTO{" +
-            "id=" + id +
-            ", name='" + name + "'" +
-            ", surname='" + surname + "'" +
-            ", nationality='" + nationality + "'" +
-            ", height='" + height + "'" +
-            '}';
-    }
 }

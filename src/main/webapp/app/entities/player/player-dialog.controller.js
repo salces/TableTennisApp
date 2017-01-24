@@ -5,9 +5,9 @@
         .module('tableTennisApp')
         .controller('PlayerDialogController', PlayerDialogController);
 
-    PlayerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Player', 'User', 'Club', 'Image','Nationality'];
+    PlayerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Player', 'User', 'Club', 'Image','Nationality', 'Notification'];
 
-    function PlayerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Player, User, Club, Image, Nationality) {
+    function PlayerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Player, User, Club, Image, Nationality, Notification) {
         var vm = this;
 
         vm.player = entity;
@@ -39,11 +39,13 @@
         function onSaveSuccess (result) {
             $scope.$emit('tableTennisApp:playerUpdate', result);
             $uibModalInstance.close(result);
+            Notification.success("Zawodnik dodany/edytowany pomyślnie");
             vm.isSaving = false;
         }
 
         function onSaveError () {
             vm.isSaving = false;
+            Notification.error("Operacja dodawania/edycji nie powiodła się");
         }
 
 

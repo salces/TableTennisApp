@@ -5,9 +5,9 @@
         .module('tableTennisApp')
         .controller('ImageDialogController', ImageDialogController);
 
-    ImageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Image', 'User'];
+    ImageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Image', 'User','Notification'];
 
-    function ImageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Image, User) {
+    function ImageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Image, User, Notification) {
         var vm = this;
 
         vm.image = entity;
@@ -37,10 +37,12 @@
         function onSaveSuccess (result) {
             $scope.$emit('tableTennisApp:imageUpdate', result);
             $uibModalInstance.close(result);
+            Notification.success('Obraz dodany/edytowany pomyślnie');
             vm.isSaving = false;
         }
 
         function onSaveError () {
+            Notification.error('Operacja dodawania/edycji nie powiodła się');
             vm.isSaving = false;
         }
 

@@ -1,14 +1,14 @@
 package pl.edu.wat.service.mapper;
 
-import pl.edu.wat.domain.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import pl.edu.wat.domain.Club;
+import pl.edu.wat.domain.Image;
+import pl.edu.wat.domain.Player;
 import pl.edu.wat.service.dto.PlayerDTO;
 
-import org.mapstruct.*;
 import java.util.List;
 
-/**
- * Mapper for the entity Player and its DTO PlayerDTO.
- */
 @Mapper(componentModel = "spring", uses = {UserMapper.class, })
 public interface PlayerMapper {
 
